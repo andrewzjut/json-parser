@@ -1,0 +1,17 @@
+{
+    "key" : {
+          "trading_amt": 1136.94,
+          "transfer_amount": 0,
+          "company": "****有限责任公司",
+          "note": "结息",
+          "pay_base": null,
+          "balance": 96837.28,
+          "trading_date": "2015-07-03 00:00:00"
+        },
+    "value" : {
+                "note": "结息",
+              "pay_base": null,
+              "balance": 96837.28,
+              "trading_date": "2015-07-03 00:00:00"
+    }
+}

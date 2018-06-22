@@ -1,0 +1,515 @@
+{
+    "id": "581b07d4d06a9802d4f35436",
+    "idCard": "350526198007111019",
+    "mobile": "18959712776",
+    "name": "林荣怀",
+    "response": {
+        "report": {
+            "final_score": 100,
+            "risk_items": [
+                {
+                    "risk_level": "high",
+                    "item_detail": {
+                        "namelist_hit_details": [
+                            {
+                                "hit_type_displayname": "借款人身份证",
+                                "fraud_type": "法院失信、法院失信、法院失信、法院失信",
+                                "court_details": [
+                                    {
+                                        "gender": "男",
+                                        "fraud_type": "法院失信",
+                                        "filing_time": "2015年05月19日",
+                                        "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                                        "execution_base": "(2014)德民初字第1417号",
+                                        "execution_department": "德化县人民法院",
+                                        "province": "福建",
+                                        "name": "林荣怀",
+                                        "duty": "要求执行102860元",
+                                        "case_number": "(2015)德执字第00661号",
+                                        "court_name": "德化县人民法院",
+                                        "age": "35",
+                                        "situation": "全部未履行"
+                                    },
+                                    {
+                                        "gender": "男",
+                                        "fraud_type": "法院失信",
+                                        "filing_time": "2016年03月30日",
+                                        "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                                        "execution_base": "(2015)德民初字第4665号",
+                                        "execution_department": "德化县人民法院",
+                                        "province": "福建",
+                                        "name": "林荣怀",
+                                        "duty": "要求执行60000元",
+                                        "case_number": "(2016)闽0526执00610号",
+                                        "court_name": "德化县人民法院",
+                                        "age": "36",
+                                        "situation": "全部未履行"
+                                    },
+                                    {
+                                        "gender": "男",
+                                        "fraud_type": "法院失信",
+                                        "filing_time": "2015年12月16日",
+                                        "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                                        "execution_base": "(2015)德民初字第558号",
+                                        "execution_department": "德化县人民法院",
+                                        "province": "福建",
+                                        "name": "林荣怀",
+                                        "duty": "要求执行120560元",
+                                        "case_number": "(2015)德执字第02445号",
+                                        "court_name": "德化县人民法院",
+                                        "age": "36",
+                                        "situation": "全部未履行"
+                                    },
+                                    {
+                                        "gender": "男",
+                                        "fraud_type": "法院失信",
+                                        "filing_time": "2015年01月14日",
+                                        "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                                        "execution_base": "(2014)德民初字第2487号",
+                                        "execution_department": "德化县人民法院",
+                                        "province": "福建",
+                                        "name": "林荣怀",
+                                        "duty": "要求执行30275元",
+                                        "case_number": "(2015)德执字第00123号",
+                                        "court_name": "德化县人民法院",
+                                        "age": "35",
+                                        "situation": "全部未履行"
+                                    }
+                                ],
+                                "description": "证据中是否存在相应的证据类型",
+                                "type": "black_list"
+                            }
+                        ],
+                        "fraud_type": "法院失信、法院失信、法院失信、法院失信",
+                        "court_details": [
+                            {
+                                "gender": "男",
+                                "fraud_type": "法院失信",
+                                "filing_time": "2015年05月19日",
+                                "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                                "execution_base": "(2014)德民初字第1417号",
+                                "execution_department": "德化县人民法院",
+                                "province": "福建",
+                                "name": "林荣怀",
+                                "duty": "要求执行102860元",
+                                "case_number": "(2015)德执字第00661号",
+                                "court_name": "德化县人民法院",
+                                "age": "35",
+                                "situation": "全部未履行"
+                            },
+                            {
+                                "gender": "男",
+                                "fraud_type": "法院失信",
+                                "filing_time": "2016年03月30日",
+                                "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                                "execution_base": "(2015)德民初字第4665号",
+                                "execution_department": "德化县人民法院",
+                                "province": "福建",
+                                "name": "林荣怀",
+                                "duty": "要求执行60000元",
+                                "case_number": "(2016)闽0526执00610号",
+                                "court_name": "德化县人民法院",
+                                "age": "36",
+                                "situation": "全部未履行"
+                            },
+                            {
+                                "gender": "男",
+                                "fraud_type": "法院失信",
+                                "filing_time": "2015年12月16日",
+                                "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                                "execution_base": "(2015)德民初字第558号",
+                                "execution_department": "德化县人民法院",
+                                "province": "福建",
+                                "name": "林荣怀",
+                                "duty": "要求执行120560元",
+                                "case_number": "(2015)德执字第02445号",
+                                "court_name": "德化县人民法院",
+                                "age": "36",
+                                "situation": "全部未履行"
+                            },
+                            {
+                                "gender": "男",
+                                "fraud_type": "法院失信",
+                                "filing_time": "2015年01月14日",
+                                "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                                "execution_base": "(2014)德民初字第2487号",
+                                "execution_department": "德化县人民法院",
+                                "province": "福建",
+                                "name": "林荣怀",
+                                "duty": "要求执行30275元",
+                                "case_number": "(2015)德执字第00123号",
+                                "court_name": "德化县人民法院",
+                                "age": "35",
+                                "situation": "全部未履行"
+                            }
+                        ]
+                    },
+                    "item_id": 1694520,
+                    "item_name": "身份证命中法院失信名单",
+                    "group": "不良信息扫描"
+                },
+                {
+                    "risk_level": "high",
+                    "item_detail": {
+                        "namelist_hit_details": [
+                            {
+                                "hit_type_displayname": "借款人身份证",
+                                "fraud_type": "法院执行、法院执行、法院执行",
+                                "court_details": [
+                                    {
+                                        "execution_status": "执行中",
+                                        "fraud_type": "法院执行",
+                                        "name": "林荣怀",
+                                        "filing_time": "2016年03月30日",
+                                        "execution_number": "60000",
+                                        "case_number": "(2016)闽0526执00610号",
+                                        "court_name": "德化县人民法院"
+                                    },
+                                    {
+                                        "execution_status": "执行中",
+                                        "fraud_type": "法院执行",
+                                        "name": "林荣怀",
+                                        "filing_time": "2015年12月16日",
+                                        "execution_number": "120560",
+                                        "case_number": "(2015)德执字第02445号",
+                                        "court_name": "德化县人民法院"
+                                    },
+                                    {
+                                        "execution_status": "执行中",
+                                        "fraud_type": "法院执行",
+                                        "name": "林荣怀",
+                                        "filing_time": "2015年05月19日",
+                                        "execution_number": "102860",
+                                        "case_number": "(2015)德执字第00661号",
+                                        "court_name": "德化县人民法院"
+                                    }
+                                ],
+                                "description": "证据中是否存在相应的证据类型",
+                                "type": "black_list"
+                            }
+                        ],
+                        "fraud_type": "法院执行、法院执行、法院执行",
+                        "court_details": [
+                            {
+                                "execution_status": "执行中",
+                                "fraud_type": "法院执行",
+                                "name": "林荣怀",
+                                "filing_time": "2016年03月30日",
+                                "execution_number": "60000",
+                                "case_number": "(2016)闽0526执00610号",
+                                "court_name": "德化县人民法院"
+                            },
+                            {
+                                "execution_status": "执行中",
+                                "fraud_type": "法院执行",
+                                "name": "林荣怀",
+                                "filing_time": "2015年12月16日",
+                                "execution_number": "120560",
+                                "case_number": "(2015)德执字第02445号",
+                                "court_name": "德化县人民法院"
+                            },
+                            {
+                                "execution_status": "执行中",
+                                "fraud_type": "法院执行",
+                                "name": "林荣怀",
+                                "filing_time": "2015年05月19日",
+                                "execution_number": "102860",
+                                "case_number": "(2015)德执字第00661号",
+                                "court_name": "德化县人民法院"
+                            }
+                        ]
+                    },
+                    "item_id": 1694524,
+                    "item_name": "身份证命中法院执行名单",
+                    "group": "不良信息扫描"
+                },
+                {
+                    "risk_level": "high",
+                    "item_detail": {
+                        "discredit_times": 1,
+                        "overdue_details": [
+                            {
+                                "overdue_amount": 70423.5
+                            }
+                        ],
+                        "type": "discredit_count"
+                    },
+                    "item_id": 1694528,
+                    "item_name": "身份证命中信贷逾期名单",
+                    "group": "不良信息扫描"
+                },
+                {
+                    "risk_level": "medium",
+                    "item_detail": {
+                        "namelist_hit_details": [
+                            {
+                                "hit_type_displayname": "借款人身份证",
+                                "fraud_type": "法院结案、法院结案、法院结案",
+                                "court_details": [
+                                    {
+                                        "gender": "-",
+                                        "fraud_type": "法院结案",
+                                        "filing_time": "2015年01月14日",
+                                        "execution_number": "30275",
+                                        "discredit_detail": "-",
+                                        "execution_base": "-",
+                                        "execution_department": "-",
+                                        "province": "-",
+                                        "execution_status": "已结案",
+                                        "name": "林荣怀",
+                                        "duty": "-",
+                                        "case_number": "(2015)德执字第00123号",
+                                        "court_name": "德化县人民法院",
+                                        "age": "-",
+                                        "situation": "-"
+                                    },
+                                    {
+                                        "gender": "-",
+                                        "fraud_type": "法院结案",
+                                        "filing_time": "2015年05月08日",
+                                        "execution_number": "40400",
+                                        "discredit_detail": "-",
+                                        "execution_base": "-",
+                                        "execution_department": "-",
+                                        "province": "-",
+                                        "execution_status": "已结案",
+                                        "name": "林荣怀",
+                                        "duty": "-",
+                                        "case_number": "(2015)德执字第00619号",
+                                        "court_name": "德化县人民法院",
+                                        "age": "-",
+                                        "situation": "-"
+                                    },
+                                    {
+                                        "gender": "男",
+                                        "fraud_type": "法院结案",
+                                        "filing_time": "2015年05月08日",
+                                        "execution_number": "-",
+                                        "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                                        "execution_base": "(2015)德民初字第559号",
+                                        "execution_department": "德化县人民法院",
+                                        "province": "福建",
+                                        "execution_status": "-",
+                                        "name": "林荣怀",
+                                        "duty": "要求执行40400元",
+                                        "case_number": "(2015)德执字第00619号",
+                                        "court_name": "德化县人民法院",
+                                        "age": "35",
+                                        "situation": "已结案"
+                                    }
+                                ],
+                                "description": "证据中是否存在相应的证据类型",
+                                "type": "black_list"
+                            }
+                        ],
+                        "fraud_type": "法院结案、法院结案、法院结案",
+                        "court_details": [
+                            {
+                                "gender": "-",
+                                "fraud_type": "法院结案",
+                                "filing_time": "2015年01月14日",
+                                "execution_number": "30275",
+                                "discredit_detail": "-",
+                                "execution_base": "-",
+                                "execution_department": "-",
+                                "province": "-",
+                                "execution_status": "已结案",
+                                "name": "林荣怀",
+                                "duty": "-",
+                                "case_number": "(2015)德执字第00123号",
+                                "court_name": "德化县人民法院",
+                                "age": "-",
+                                "situation": "-"
+                            },
+                            {
+                                "gender": "-",
+                                "fraud_type": "法院结案",
+                                "filing_time": "2015年05???08日",
+                                "execution_number": "40400",
+                                "discredit_detail": "-",
+                                "execution_base": "-",
+                                "execution_department": "-",
+                                "province": "-",
+                                "execution_status": "已结案",
+                                "name": "林荣怀",
+                                "duty": "-",
+                                "case_number": "(2015)德执字第00619号",
+                                "court_name": "德化县人民法院",
+                                "age": "-",
+                                "situation": "-"
+                            },
+                            {
+                                "gender": "男",
+                                "fraud_type": "法院结案",
+                                "filing_time": "2015年05月08日",
+                                "execution_number": "-",
+                                "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                                "execution_base": "(2015)德民初字第559号",
+                                "execution_department": "德化县人民法院",
+                                "province": "福建",
+                                "execution_status": "-",
+                                "name": "林荣怀",
+                                "duty": "要求执行40400元",
+                                "case_number": "(2015)德执字第00619号",
+                                "court_name": "德化县人民法院",
+                                "age": "35",
+                                "situation": "已结案"
+                            }
+                        ]
+                    },
+                    "item_id": 1694534,
+                    "item_name": "身份证命中法院结案名单",
+                    "group": "不良信息扫描"
+                },
+                {
+                    "risk_level": "low",
+                    "item_detail": {
+                        "namelist_hit_details": [
+                            {
+                                "hit_type_displayname": "借款人身份证",
+                                "fraud_type": "异常借款",
+                                "description": "验证匹配字段是否在欺诈灰名单中",
+                                "type": "grey_list"
+                            }
+                        ],
+                        "fraud_type": "异常借款"
+                    },
+                    "item_id": 1694536,
+                    "item_name": "身份证命中中风险关注名单",
+                    "group": "不良信息扫描"
+                },
+                {
+                    "risk_level": "low",
+                    "item_detail": {
+                        "namelist_hit_details": [
+                            {
+                                "hit_type_displayname": "借款人手机",
+                                "fraud_type": "异常借款",
+                                "description": "验证匹配字段是否在欺诈灰名单中",
+                                "type": "grey_list"
+                            }
+                        ],
+                        "fraud_type": "异常借款"
+                    },
+                    "item_id": 1694570,
+                    "item_name": "手机号命中中风险关注名单",
+                    "group": "不良信息扫描"
+                },
+                {
+                    "risk_level": "medium",
+                    "item_detail": {
+                        "namelist_hit_details": [
+                            {
+                                "hit_type_displayname": "借款人手机",
+                                "fraud_type": "信贷逾期名单、法院结案、法院失信、法院执行",
+                                "description": "验证匹配字段是否在欺诈灰名单中",
+                                "type": "grey_list"
+                            }
+                        ],
+                        "fraud_type": "信贷逾期名单、法院结案、法院失信、法院执行"
+                    },
+                    "item_id": 1694574,
+                    "item_name": "手机号命中高风险关注名单",
+                    "group": "不良信息扫描"
+                },
+                {
+                    "risk_level": "low",
+                    "item_detail": {
+                        "frequency_detail_list": [
+                            {
+                                "data": [
+                                    "3505※※※※※※※※※※0523",
+                                    "350526198007111019"
+                                ],
+                                "detail": "3个月手机号关联身份证数：2"
+                            }
+                        ],
+                        "type": "frequency_detail"
+                    },
+                    "item_id": 1694636,
+                    "item_name": "3个月内申请信息关联多个身份证",
+                    "group": "客户行为检测"
+                },
+                {
+                    "risk_level": "low",
+                    "item_detail": {
+                        "frequency_detail_list": [
+                            {
+                                "detail": "7天内身份证申请次数：15"
+                            },
+                            {
+                                "detail": "7天内手机号申请次数：15"
+                            }
+                        ],
+                        "type": "frequency_detail"
+                    },
+                    "item_id": 1694654,
+                    "item_name": "7天内设备或身份证或手机号申请次数过多",
+                    "group": "客户行为检测"
+                },
+                {
+                    "risk_level": "low",
+                    "item_detail": {
+                        "platform_detail": [
+                            "一般消费分期平台:1"
+                        ],
+                        "platform_count": 1,
+                        "type": "platform_detail"
+                    },
+                    "item_id": 1869552,
+                    "item_name": "3个月内申请人申请借款平台总数大于等于1且小于3_无本平台",
+                    "group": "多平台借贷申请检测"
+                },
+                {
+                    "risk_level": "low",
+                    "item_detail": {
+                        "platform_detail_dimension": [
+                            {
+                                "count": 5,
+                                "detail": [
+                                    "一般消费分期平台:1",
+                                    "P2P网贷:3",
+                                    "厂商汽车金融:1"
+                                ],
+                                "dimension": "借款人手机详情"
+                            },
+                            {
+                                "count": 5,
+                                "detail": [
+                                    "P2P网贷:4",
+                                    "厂商汽车金融:1"
+                                ],
+                                "dimension": "借款人身份证详情"
+                            }
+                        ],
+                        "platform_detail": [
+                            "一般消费分期平台:1",
+                            "P2P网贷:4",
+                            "厂商汽车金融:1"
+                        ],
+                        "platform_count": 6,
+                        "type": "platform_detail"
+                    },
+                    "item_id": 1694680,
+                    "item_name": "24个月内申请人在多个平台申请借款",
+                    "group": "多平台借贷申请检测"
+                }
+            ],
+            "address_detect": {
+                "mobile_address": "福建省泉州市",
+                "id_card_address": "福建省泉州市德化县"
+            },
+            "final_decision": "Reject",
+            "report_time": 1478166480000,
+            "success": true,
+            "report_id": "ER2016110317480019463551",
+            "apply_time": 1478166480000,
+            "application_id": "161103174759999997DEA16C488C0C19"
+        },
+        "status": 1
+    },
+    "responseReport": {
+        "$ref": "$.response.report"
+    },
+    "timestamp": 1478166483545
+}

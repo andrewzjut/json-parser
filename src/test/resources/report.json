@@ -1,0 +1,431 @@
+{
+  "id_number": "432215199210254512",
+  "response": {
+    "status": 1,
+    "report": {
+      "success": true,
+      "final_score": 80,
+      "final_decision": "Review",
+      "report_id": "ER2015070617512600000001",
+      "apply_time": 1436841918368,
+      "report_time": 1436842025749,
+      "device_type": "web",
+      "proxy_info": [
+        {
+          "port1": "8082",
+          "proxyProtocol1": "HTTP",
+          "proxyType1": "HTTP"
+        },
+        {
+          "port": "8081",
+          "proxyProtocol": "PPTP",
+          "proxyType": "VPN"
+        }
+      ],
+      "device_info": {
+        "accept": "*/*",
+        "acceptEncoding": "gzip,deflate,sdch",
+        "acceptLanguage": "zh-CN,zh;q=0.8",
+        "browser": "chrome",
+        "browserType": "chrome",
+        "browserVersion": "31.0.1650.63",
+        "canvas": "57d1ed3766927be5de7018e7c43db5e4",
+        "cookieEnabled": "true",
+        "deviceId": "f14fd49ac7da52f751c791ca16391c51",
+        "deviceType": "Windows XP",
+        "flashEnabled": "true",
+        "fontId": "a90699a33ca21b53ae8a4fa16d11829e",
+        "fpCookie": "B0F75E91DAF193D39C192D6275F282E09EAF23E240ED347327C712B8BBCDBDEC4DF39C04F05E0C369788A2F483D735889A6BD108DE818070",
+        "identifier": "1436805698330-8099812",
+        "langRes": "zh-CN^^-^^-^^-^^-",
+        "languageRes": "zh-CN^^-^^-^^-^^-",
+        "os": "Windows XP",
+        "pluginList": "ee52cdfa3df5df56001962d1ed9b6d3c",
+        "refer": "http://www.aixuedai.com/user/authentication?refer=reg",
+        "referer": "http://www.aixuedai.com/user/authentication?refer=reg",
+        "screenRes": "1920^^1080^^72^^color",
+        "smartId": "s_8e679e4d305546702c51413a14a43643",
+        "softId": "b8cb9b155130972ca833300a65ed4db8",
+        "tcpOs": "Windows XP",
+        "tokenId": "aixuedaigv7ehqk0aq7sps08bchbes9qv1",
+        "trueIp": "116.207.145.134",
+        "userAgent": "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36",
+        "version": "0.0.3"
+      },
+      "geo_ip": {
+        "ip": "49.74.194.234",
+        "lip": 826983146,
+        "country": "中国",
+        "province": "江苏省",
+        "city": "南京市",
+        "county": "南京市",
+        "isp": "电信",
+        "latitude": 32.1008,
+        "longitude": 118.926
+      },
+      "geo_trueip": {
+        "ip": "49.74.194.234",
+        "lip": 826983146,
+        "country": "中国",
+        "province": "江苏省",
+        "city": "南京市",
+        "county": "南京市",
+        "isp": "电信",
+        "latitude": 32.1008,
+        "longitude": 118.926
+      },
+      "kunta_call_result": {
+        "real_name_check": [
+          {
+            "result": "一直",
+            "result_code": "405",
+            "id_number": "640223199801016519",
+            "flow_charge": false,
+            "name": "哇哈哈"
+          }
+        ],
+        "card_name_check": [
+          {
+            "result": "暂不支持移动手机号相关服务",
+            "result_code": "405",
+            "name": "大爷",
+            "flow_charge": false,
+            "card": "6228481231234512345"
+          }
+        ],
+        "card_mobile_check": [
+          {
+            "result": "暂不支持移动手机号相关服务",
+            "result_code": "405",
+            "mobile": "15205153027",
+            "flow_charge": false,
+            "card": "6228481231234512345"
+          }
+        ],
+        "mobile_name_check": [
+          {
+            "result": "暂不支持移动手机号相关服务",
+            "result_code": "405",
+            "name": "大爷",
+            "flow_charge": false,
+            "mobile": "15205153027"
+          }
+        ],
+        "mobile_id_number_name_check": [
+          {
+            "result": "暂不支持移动手机号相关服务",
+            "result_code": "405",
+            "id_number": "640223199801016519",
+            "flow_charge": false,
+            "name": "大爷",
+            "third_part_degree": "本科",
+            "third_part_graduate_school": "逗逼大学",
+            "third_part_speciality": "相声",
+            "third_part_enrol_date": "2011.07.11",
+            "third_part_graduate_date": "2016.06.19",
+            "third_part_study_style": "一本",
+            "third_part_study_result": "毕业"
+          }
+        ],
+        "mobile_id_number_check": [
+          {
+            "result": "暂不支持移动手机号相关服务",
+            "result_code": "405",
+            "id_number": "640223199801016519",
+            "flow_charge": false,
+            "mobile": "15205153027"
+          }
+        ]
+      },
+      "risk_items": [
+        {
+          "risk_level": "low",
+          "item_detail": {
+            "type": "custom_list",
+            "high_risk_areas": [
+              "浙江省台州市黄岩区"
+            ]
+          },
+          "item_id": 1694518,
+          "item_name": "身份证归属地位于高风险较为集中地区",
+          "group": "个人基本信息核查"
+        },
+        {
+          "risk_level": "low",
+          "item_detail": {
+            "platform_detail_dimension": [
+              {
+                "count": 5,
+                "detail": [
+                  "一般消费分期平台:1",
+                  "P2P网贷:3",
+                  "厂商汽车金融:1"
+                ],
+                "dimension": "借款人手机详情"
+              },
+              {
+                "count": 5,
+                "detail": [
+                  "P2P网贷:4",
+                  "厂商汽车金融:1"
+                ],
+                "dimension": "借款人身份证详情"
+              }
+            ],
+            "platform_detail": [
+              "一般消费分期平台:1",
+              "P2P网贷:4",
+              "厂商汽车金融:1"
+            ],
+            "platform_count": 6,
+            "type": "platform_detail"
+          },
+          "item_id": 1694680,
+          "item_name": "24个月内申请人在多个平台申请借款",
+          "group": "多平台借贷申请检测"
+        },
+        {
+          "item_id": 1694696,
+          "item_name": "第一联系人身份证命中信贷逾期名单_近亲",
+          "risk_level": "high",
+          "group": "关联人信息扫描",
+          "item_detail": {
+            "discredit_times": 2,
+            "overdue_details": [
+              {
+                "overdue_amount": 5628.4,
+                "overdue_count": 2,
+                "overdue_day": 37
+              },
+              {
+                "overdue_amount": 1000,
+                "overdue_count": 1,
+                "overdue_day": 56
+              }
+            ],
+            "type": "discredit_count"
+          }
+        },
+        {
+          "risk_level": "low",
+          "item_detail": {
+            "frequency_detail_list": [
+              {
+                "data": [
+                  "3505※※※※※※※※※※0523",
+                  "350526198007111019"
+                ],
+                "detail": "3个月手机号关联身份证数：2"
+              }
+            ],
+            "type": "frequency_detail"
+          },
+          "item_id": 1694636,
+          "item_name": "3个月内申请信息关联多个身份证",
+          "group": "客户行为检测"
+        },
+        {
+          "item_name": "身份证_姓名命中法院失信模糊名单",
+          "item_id": 1694544,
+          "risk_level": "high",
+          "group": "不良信息扫描",
+          "item_detail": {
+            "namelist_hit_details": [
+              {
+                "fuzzy_detail_hits": [
+                  {
+                    "fraud_type": "AA模糊名单",
+                    "fuzzy_id_number": "341221190103****",
+                    "fuzzy_name": "张三"
+                  },
+                  {
+                    "fraud_type": "AA模糊名单",
+                    "fuzzy_id_number": "353451190309****",
+                    "fuzzy_name": "李四"
+                  }
+                ],
+                "description": "规则描述XXX",
+                "type": "fuzzy_list"
+              }
+            ]
+          }
+        },
+        {
+          "risk_level": "low",
+          "item_detail": {
+            "namelist_hit_details": [
+              {
+                "hit_type_displayname": "借款人身份证",
+                "fraud_type": "异常借款",
+                "description": "验证匹配字段是否在欺诈灰名单中",
+                "type": "grey_list"
+              }
+            ],
+            "fraud_type": "异常借款"
+          },
+          "item_id": 1694536,
+          "item_name": "身份证命中中风险关注名单",
+          "group": "不良信息扫描"
+        },
+        {
+          "risk_level": "high",
+          "item_detail": {
+            "namelist_hit_details": [
+              {
+                "hit_type_displayname": "借款人身份证",
+                "fraud_type": "法院失信、法院失信、法院失信、法院失信",
+                "court_details": [
+                  {
+                    "gender": "男",
+                    "fraud_type": "法院失信",
+                    "filing_time": "2015年05月19日",
+                    "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                    "execution_base": "(2014)德民初字第1417号",
+                    "execution_department": "德化县人民法院",
+                    "province": "福建",
+                    "name": "林荣怀",
+                    "duty": "要求执行102860元",
+                    "case_number": "(2015)德执字第00661号",
+                    "court_name": "德化县人民法院",
+                    "age": "35",
+                    "situation": "全部未履行"
+                  },
+                  {
+                    "gender": "男",
+                    "fraud_type": "法院失信",
+                    "filing_time": "2016年03月30日",
+                    "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                    "execution_base": "(2015)德民初字第4665号",
+                    "execution_department": "德化县人民法院",
+                    "province": "福建",
+                    "name": "林荣怀",
+                    "duty": "要求执行60000元",
+                    "case_number": "(2016)闽0526执00610号",
+                    "court_name": "德化县人民法院",
+                    "age": "36",
+                    "situation": "全部未履行"
+                  },
+                  {
+                    "gender": "男",
+                    "fraud_type": "法院失信",
+                    "filing_time": "2015年12月16日",
+                    "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                    "execution_base": "(2015)德民初字第558号",
+                    "execution_department": "德化县人民法院",
+                    "province": "福建",
+                    "name": "林荣怀",
+                    "duty": "要求执行120560元",
+                    "case_number": "(2015)德执字第02445号",
+                    "court_name": "德化县人民法院",
+                    "age": "36",
+                    "situation": "全部未履行"
+                  },
+                  {
+                    "gender": "男",
+                    "fraud_type": "法院失信",
+                    "filing_time": "2015年01月14日",
+                    "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                    "execution_base": "(2014)德民初字第2487号",
+                    "execution_department": "德化县人民法院",
+                    "province": "福建",
+                    "name": "林荣怀",
+                    "duty": "要求执行30275元",
+                    "case_number": "(2015)德执字第00123号",
+                    "court_name": "德化县人民法院",
+                    "age": "35",
+                    "situation": "全部未履行"
+                  }
+                ],
+                "description": "证据中是否存在相应的证据类型",
+                "type": "black_list"
+              }
+            ],
+            "fraud_type": "法院失信、法院失信、法院失信、法院失信",
+            "court_details": [
+              {
+                "gender": "男",
+                "fraud_type": "法院失信",
+                "filing_time": "2015年05月19日",
+                "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                "execution_base": "(2014)德民初字第1417号",
+                "execution_department": "德化县人民法院",
+                "province": "福建",
+                "name": "林荣怀",
+                "duty": "要求执行102860元",
+                "case_number": "(2015)德执字第00661号",
+                "court_name": "德化县人民法院",
+                "age": "35",
+                "situation": "全部未履行"
+              },
+              {
+                "gender": "男",
+                "fraud_type": "法院失信",
+                "filing_time": "2016年03月30日",
+                "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                "execution_base": "(2015)德民初字第4665号",
+                "execution_department": "德化县人民法院",
+                "province": "福建",
+                "name": "林荣怀",
+                "duty": "要求执行60000元",
+                "case_number": "(2016)闽0526执00610号",
+                "court_name": "德化县人民法院",
+                "age": "36",
+                "situation": "全部未履行"
+              },
+              {
+                "gender": "男",
+                "fraud_type": "法院失信",
+                "filing_time": "2015年12月16日",
+                "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                "execution_base": "(2015)德民初字第558号",
+                "execution_department": "德化县人民法院",
+                "province": "福建",
+                "name": "林荣怀",
+                "duty": "要求执行120560元",
+                "case_number": "(2015)德执字第02445号",
+                "court_name": "德化县人民法院",
+                "age": "36",
+                "situation": "全部未履行"
+              },
+              {
+                "gender": "男",
+                "fraud_type": "法院失信",
+                "filing_time": "2015年01月14日",
+                "discredit_detail": "其他有履行能力而拒不履行生效法律文书确定义务",
+                "execution_base": "(2014)德民初字第2487号",
+                "execution_department": "德化县人民法院",
+                "province": "福建",
+                "name": "林荣怀",
+                "duty": "要求执行30275元",
+                "case_number": "(2015)德执字第00123号",
+                "court_name": "德化县人民法院",
+                "age": "35",
+                "situation": "全部未履行"
+              }
+            ]
+          }
+        }
+      ],
+      "address_detect": {
+        "id_card_address": "河南省漯河市临颍县",
+        "mobile_address": "浙江省杭州市",
+        "true_ip_address": "河南省漯河市",
+        "wifi_address": "河南省漯河市临颍县城关镇迎宾路",
+        "cell_address": "河南省漯河市临颍县城关镇迎宾路",
+        "bank_card_address": "农行北京分行"
+      }
+    }
+  },
+  "name": "张三",
+  "mobile": "13516548756",
+  "_id": {
+    "date": 1478677357000,
+    "inc": 1613127822,
+    "machine": 497937336,
+    "new": false,
+    "time": 1478677357000,
+    "timeSecond": 1478677357,
+    "timestamp": 1478677357
+  },
+  "timestamp": 1478677357197
+}

@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<!-- saved from url=(0120)https://portal.tongdun.cn/preloanentrance/creditapply/reporthistory/preLoanReport.htm?report_id=ER2016102514131916406263 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="./iconfont(1).css">
+    <script src="./jquery-1.8.3.min.js(1).下载"></script>
+    <style>
+        html,body{
+            zoom:1;
+            z-index:99999;
+            height:100%;
+            position: relative;
+            margin:0;
+            padding:0;
+        }
+        .w30 {
+            width: 30px !important;
+        }
+        .container {
+            position: absolute;
+            margin-left: -449px;
+            top: 0;
+            left: 50%;
+            background-color: #f9f9f9;
+            padding-top: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            font-size: 13px;
+            width:859px;
+            min-height: 100%;
+        }
+        .report-a-close{
+            position: fixed;
+            background-color: #fff;
+            width: 52px;
+            height: 50px;
+            font-size: 32px;
+            line-height: 50px;
+            text-align: center;
+            margin-left: 888px;
+            top: 0;
+        }
+        .report-a-close a{
+            text-decoration: none;
+            color:#ccc;
+        }
+        .header {
+            font-size: 12px;
+            overflow: hidden;
+            padding: 13px 0px;
+            font-family: STSong,NSimSun,SimSun,serif;
+        }
+        .header-title {
+            margin: 0 10px 0 0;
+            font-size: 20px;
+            color: #333;
+            font-family: 'Microsoft Yahei';
+        }
+
+        .header-report-id{
+            margin-top:8px;
+        }
+        .header-report-application{
+            margin-top:3px;
+        }
+        .header-scan-time {
+            margin-top: 8px;
+        }
+
+        .container .time-line {
+            font-size: 13px;
+            margin-top: 10px 10px 24px 10px;
+            padding: 20px;
+            background: #f0f0f0;
+            position: relative;
+        }
+
+        .vertical-line {
+            position: absolute;
+            width: 2px;
+            background: #ccc;
+            top: 31px;
+            bottom: 30px;
+            left: 115px;
+        }
+        .each-container {
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .label-date {
+            position: absolute;
+            margin-top: 15px;
+        }
+
+        .label-circle {
+            width: 8px;
+            height: 8px;
+            border: 3px solid #fff;
+            position: absolute;
+            margin-top: 17px;
+            left: 89px;
+            background: #2EA5FF;
+            border-radius: 10px;
+        }
+
+        .risk-content {
+            margin-top: 10px;
+            margin-left: 115px;
+            background-color: #fff;
+            padding: 0 25px;
+            border-radius: 10px;
+        }
+
+        .risk-content:before {
+            content: ' ';
+            width: 0;
+            position: absolute;
+            border: 10px solid transparent;
+            border-right-color: #fff;
+            left: 95px;
+            top: 11px;
+        }
+
+        .risk-content-info {
+            font-size: 13px;
+            padding-left: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table .risk-col1 {
+            width: 30%;
+            height: 50px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        table .risk-col2 {
+            height: 50px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .risk-row {
+            font-size: 14px;
+            color: #999;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .risk-content-info-title {
+            color: #000;
+            font-size:15px;
+        }
+
+        .label-scan-time, .no_risk_info {
+            text-align: center;
+            margin-bottom: 15px;
+            margin-top: 0px;
+        }
+        .time-line .label-scan-time-title,.time-line .label-scan-time-content{
+            font-family: STSong,NSimSun,SimSun,serif;
+            font-size:12px;
+        }
+
+        /*个人基本信息*/
+        .person-info{
+            padding-top: 5px;
+            border-top: 20px solid #f9f9f9;
+            border-bottom: 10px solid #f9f9f9;
+        }
+
+        h2 {
+            color: #666;
+        }
+        .rpi-subitem .fl{
+            margin-top: 10px!important;
+            margin: 0px;
+        }
+        .person-info .monitor-report-preloan, .person-info .monitor-report-loan {
+            display: inline-block;
+            width: 48%;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .person-info .rpi-subitem {
+            overflow: hidden;
+            padding: 0 23px 16px;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .person-info .rpi-subitem p.fl,.person-info .rpi-subitem p.fr {
+            display: inline-block;
+            width: 49%;
+        }
+
+        .person-info .rpi-subitem .per49w {
+            display: inline-block;
+            width: 49%;
+            height: 14px;
+            line-height:14px;
+            margin-top: 0;
+            overflow: hidden;
+        }
+
+        .person-info .rpi-subitem .p-hidden {
+            height: 14px;
+            line-height: 14px;
+            overflow: hidden;
+        }
+
+        .person-info .contact-person {
+            overflow: hidden;
+        }
+
+        .person-info .contact1_person, .person-info .contact2_person, .person-info .contact3_person {
+            display: inline-block;
+            width: 32%;
+            vertical-align: top;
+        }
+
+        /*设备信息*/
+        .rp-device-info {
+            background: #fff;
+            padding: 10px 10px 10px 0px;
+            margin-top:10px;
+            overflow: hidden;
+        }
+        .rp-device-info .rpi-subitem{
+            padding-left:20px;
+            margin-bottom:13px;
+            overflow: hidden;
+        }
+
+        .rp-device-info p.fl, .rp-device-info p.fr {
+            width: 50%;
+            display: inline-block;
+        }
+        .rp-device-info .rpi-subitem .fr{
+            margin-bottom:0px;
+        }
+        /*检测项目*/
+        .rp-basic-check {
+            padding: 10px 10px 10px 0px;
+            color: #999;
+            border-bottom: 10px solid #f9f9f9;
+        }
+        .table-wrap{
+            padding: 0 20px 10px;
+        }
+
+
+        .check-table {
+            font-size: 13px;
+            padding-left: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .check-table thead {
+            border-bottom: 2px solid #eaeaea;
+        }
+
+        .check-table .risk-item-name {
+            color: #333;
+        }
+
+        .check-table .risk-item-level {
+            color: #333;
+            text-align: center;
+        }
+
+        .check-table .border-bottom-2 {
+            border-bottom: 2px solid #eaeaea;
+        }
+
+        .check-table .border-bottom-1 {
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .check-table th, .check-table td {
+            padding-left: 10px;
+            height: 36px;
+            text-align: left;
+        }
+
+        .check-table .inline-center {
+            text-align: center;
+            padding-left:0px;
+        }
+        /*查看详情*/
+        .a-detail {
+            width: 480px;
+            display: none;
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 16px rgba(0,0,0,.2);
+            overflow-y: scroll;
+            z-index:999;
+        }
+        .detail-a-close a{
+            text-decoration: none;
+            color: #999;
+        }
+        .detail-a-close{
+            text-align: right;
+            margin: 10px 10px 0px 10px;
+        }
+        .detail-table{
+            overflow-y: scroll;
+        }
+        .detail-table table{
+            width: 96%;
+            margin: 10px 2%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+        .detail-table table td{
+            border: 1px solid #ccc;
+            height: 36px;
+            font-size: 15px;
+            line-height: 36px;
+            color:#666;
+        }
+        /*报告内自体的颜色*/
+        .container .risk-content-count-now,.container .table-mark {
+            color: #C00;
+        }
+        .label-number{
+            font-size:12px;
+        }
+        .label-span{
+            color:#666;
+        }
+        .label{
+            color:#999;
+            font-size:14px;
+        }
+        .project-name,.inline-center{
+            color:#666;
+        }
+        .rpi-title{
+            font-size: 16px;
+            font-weight: 700;
+            padding: 0px 23px 0px 20px;
+        }
+        .contact-person-title {
+            font-size: 16px;
+            font-weight: 700;
+            padding: 0px 23px 0px 20px;
+        }
+        .jz,.table-href{
+            color:#2ea5ff;
+            cursor: pointer;
+        }
+        .j-rpi-toggle-target{
+            display: none;
+        }
+        .table-href{
+            text-decoration:none;
+            /*margin-left: 40px;*/
+        }
+        .table-href:hover{
+            opacity: .7;
+            text-decoration:underline;
+        }
+        .scan-time{
+            margin-right: 20px;
+        }
+
+        /*报告头部信息*/
+        .risk-score{
+            height: 178px;
+            position: relative;
+        }
+
+        .result-score-wrap{
+            width: 244px;
+            height: 122px;
+            position: absolute;
+            top: 50%;
+            left: 47px;
+            margin-top: -61px;
+        }
+        .result-score-canvas-main{
+            position: absolute;
+        }
+
+        #canvas-main{
+            display: block;
+            width: 244px;
+            height: 122px;
+        }
+
+        .result-score-canvas-bg{
+            position: absolute;
+        }
+
+        .result-score-text{
+            top: 60%;
+            left: 28px;
+            width: 64px;
+            margin-top: -42px;
+            position: absolute;
+        }
+
+        .result-score {
+            font-size: 32px;
+            color: #333;
+            text-align: center;
+        }
+
+        .result-cat{
+            font-size: 14px;
+            text-align: center;
+            height: 23px;
+            line-height: 23px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .result-text{
+            margin-top: 60px;
+            margin-left: 325px;
+            float: left;
+        }
+
+        .result-text .result {
+            font-size: 14px;
+            margin-top: 12px;
+        }
+        .result-text p {
+            line-height: 1;
+        }
+
+        .result-text a {
+            display: inline-block;
+            color: #2ea5ff;
+            height: 18px;
+            line-height: 18px;
+            padding: 0 2px;
+            border-bottom: 1px solid #2ea5ff;
+            text-decoration: none;
+        }
+
+        .tongdun-certification{
+            margin-top: 50px;
+            margin-right: 88px;
+        }
+
+        .fl{
+            float: left;
+        }
+
+        .fr{
+            float:right;
+        }
+
+        .result-text .tip {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .result-cat.reject {
+            color: #ff6c5c;
+        }
+        .result-cat.accept {
+            color: #8cdb65;
+        }
+        .result-cat.review {
+            color: #f8d436;
+        }
+        .col1{
+            width: 45%;
+            padding-right: 10px;
+            text-align: right;
+        }
+        .col2{
+            padding-left: 10px;
+        }
+
+        .report-mask{
+            position:absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            opacity: 0.7;
+        }
+
+        .msk-detail {
+            position:absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #000;
+            opacity: 0;
+            right: 0;
+            display: none;
+            z-index:998;
+        }
+
+        .report-container{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+
+        .contact{
+            font-size: 14px;
+        }
+        .dimension-section, .risk-detail-section {
+            padding-top: 1px;
+            color: #666;
+        }
+        .risk-detail-section {
+            width: 300px;
+        }
+        .dimension-title, .risk-detail-title {
+            display: inline-block;
+            cursor: pointer;
+        }
+        .dimension-list, .risk-detail-list {
+            display: none;
+            padding: 1px 0 0 20px;
+            list-style: none;
+        }
+        .risk-detail-list {
+            list-style-type: circle;
+        }
+        .dimension-item {
+            padding-bottom: 3px;
+        }
+        .inner{background-color: #fff;}
+
+        .header .report-application{
+            margin-bottom: 2px;
+        }
+
+    </style>
+</head>
+<body>
+
+        <div class="report-mask"></div>
+    <div class="report-container">
+        <div class="container">
+            <div class="report-a-close" id="report-a-close"><a href="javascript:void(0)"><img src="./close-btn.png" alt=""></a></div>
+            <div class="header">
+                <h1 class="header-title fl">贷前审核报告</h1>
+                <div class="header-report-application  fl">
+                    <div class="report-application"><span class="label-number">报告编号:</span>
+                    <span id="monitor-detail-id">ER2016102514131916406263</span>
+                    </div>
+                                            <div class="report-application">
+                            <span class="label-number">申请编号:</span>
+                            <span id="monitor-detail-id">16102514131990C82C</span>
+                        </div>
+                                    </div>
+                <div class="header-scan-time fr">
+                    <span class="label-number">报告时间:</span>
+                    <span id="monitor-scan-time">2016-10-25 14:13:19</span>
+                </div>
+            </div>
+            <div class="inner" style="background-image: url(&quot;data:image/png;base64,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&quot;);">
+            <div class="risk-score">
+                <div class="fl result-score-wrap">
+                    <div class="result-score-canvas-main">
+                        <canvas id="canvas-main"></canvas>
+                    </div>
+                    <div class="result-score-canvas-bg">
+                        <canvas id="canvas-bg"></canvas>
+                    </div>
+                    <div class="result-score-text">
+                        <div id="result-score" class="result-score">100</div>
+                        <div id="result-cat" class="result-cat reject">
+                                                            建议拒绝
+                                                    </div>
+                    </div>
+                </div>
+                <div class="fl result-text">
+                                            <p class="tip">申请用户检测出高危风险，建议拒绝</p>
+                    
+                    <p class="result">共发现<a id="risk-count" href="javascript:void(0);">11</a>异常信息
+                    </p>
+                </div>
+            </div>
+            <div class="person-info">
+                <h2 class="rpi-title">个人基本信息</h2>
+                <div class="rpi-subitem">
+                                                                                    <p class="per49w">
+                    <span class="label">申请借款日期: <span class="label-span">
+                        2016-10-25                    </span></span>
+                        </p>
+                                                                                                                    </div>
+                <div class="rpi-subitem">
+
+                                            <p class="per49w">
+                    <span class="label">姓&nbsp;&nbsp;&nbsp;&nbsp;名: <span class="label-span">
+                        喻世军                    </span></span>
+                        </p>
+                    
+                                            <p class="per49w">
+                    <span class="label">身份证号:<span class="label-span">
+                        342524197811032410                    </span></span>
+                        </p>
+                    
+                                            <p class="per49w">
+                    <span class="label">手机号码: <span class="label-span">
+                        13805621562                    </span></span>
+                        </p>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                                    </div>
+
+                                                    <div class="contact-person">
+                                                                                                                                            </div>
+                            </div>
+
+
+
+                                        <!--归属地解析-->
+                <div class="person-info">
+                    <h2 class="rpi-title">归属地解析</h2>
+                <div class="rpi-subitem">
+                                        <p class="p-hidden">
+                    <span class="label">身份证所属地: <span class="label-span">
+                        安徽省宣城地区宁国县
+                    </span></span>
+                    </p>
+                                                            <p class="p-hidden">
+                    <span class="label">手机所属地: <span class="label-span">
+                        安徽省宣城市
+                    </span></span>
+                    </p>
+                                                                                                                    </div>
+                </div>
+            
+
+
+
+
+
+
+                        
+            <!-- 检测项目 -->
+            
+            <style>
+    .name-detail-em{
+        color:#C00;
+    }
+    .description{
+        margin-bottom:0px;
+        color:#666;
+    }
+    .check-table .rownbsp{
+        width:18%;
+    }
+    .check-table .row1 {
+        width:30%;
+    }
+    .check-table .risk-item-level {
+        color: #333;
+        text-align: center;
+    }
+    .check-table .row3{
+        /*width:35%;*/
+    }
+    .check-table .row2 {
+        width:13%;
+        text-align: center;
+        padding-left:0px;
+    }
+    .check-table .row4 {
+        width:13%;
+    }
+    .template-tip{
+        padding:0px 23px 0px 20px;
+        color:#C00;
+        display: none;
+        font-size:14px;
+    }
+</style>
+<div class="rp-item rp-basic-check" id="risk-items">
+    <h2 class="rpi-title">贷前风险情况</h2>
+    <input type="hidden" value="false" id="tip-value">
+    <div class="template-tip">提示：存在未进行分组配置的规则</div>
+    <div class="table-wrap">
+        <table class="check-table">
+            <thead>
+            <tr>
+                <th class="rownbsp">&nbsp;</th>
+                <th class="row1">检查项目</th>
+                <th class="row2">风险等级</th>
+                <th class="row3">备注</th>
+            </tr>
+            </thead>
+            <tbody>
+                                
+                                    
+                                        <tr class="border-bottom-2">
+                        <td>个人基本信息核查</td>
+                        <td colspan="3"><img src="./pass.png" alt=""></td>
+                    </tr>
+                                                                            
+                                                                                                                                        <tr class="risk-items-flag border-bottom-1">
+                                    <td rowspan="8">不良信息扫描</td>
+                                    <td class="risk-item-name">身份证命中信贷逾期名单</td>
+                                    <td class="risk-item-level">高</td>
+                                    <td>
+                                                                            <ul class="table-mark">
+                                    <li>失信次数: 1</li>
+                                                            <li>逾期金额: 2766.28
+                                                        逾期天数: 7
+                        </li>
+                                                                                            </ul>
+                                        </td>
+                                </tr>
+                                                                                                                            <tr class="risk-items-flag border-bottom-1">
+                                    <td class="risk-item-name">身份证命中法院结案名单</td>
+                                    <td class="risk-item-level">中</td>
+                                    <td>
+                                                                                                    <div class="description">
+                        <table>
+                            <tbody><tr>
+                                <td style="width:65px; padding:0px;height: 16px!important;vertical-align: top;">规则描述：</td>
+                                <td style="vertical-align:top;word-break: break-all;word-wrap:break-word;padding: 0px;height:16px!important;">
+                                    证据中是否存在相应的证据类型
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                                <ul style="margin-top:1px;color:#666;">
+                                            <li><span class="name-detail-em">风险类型：</span>法院结案</li>
+                                                                <li><span class="name-detail-em">匹配字段：</span>借款人身份证</li>
+                                                                                            <li>
+                                <a class="table-href" id="1694534" href="javascript:void(0)">法院详情</a>
+                                <div class="a-detail">
+                                    <div class="detail-a-close">
+                                        <a href="javascript:void(0)" class="detail-close-x" id="detail-close"><img src="./close-btn.png" alt="" style=" width: 20px;"></a></div>
+                                    <div class="detail-table">
+                                                                                    <table>
+                                                                                                    <tbody><tr>
+                                                        <td class="col1">
+                                                            被执行人姓名:
+                                                        </td>
+                                                        <td class="col2">
+                                                            喻世军                                                        </td>
+                                                    </tr>
+                                                                                                                                                                                                                                                                                                    <tr>
+                                                        <td class="col1">
+                                                            执行法院:
+                                                        </td>
+                                                        <td class="col2">
+                                                            宁国市人民法院                                                        </td>
+                                                    </tr>
+                                                                                                                                                                                                                                                    <tr>
+                                                        <td class="col1">
+                                                            立案时间:
+                                                        </td>
+                                                        <td class="col2">
+                                                            2015年04月13日                                                        </td>
+                                                    </tr>
+                                                                                                                                                    <tr>
+                                                        <td class="col1">
+                                                            案号:
+                                                        </td>
+                                                        <td class="col2">
+                                                            (2015)宁执字第00919号                                                        </td>
+                                                    </tr>
+                                                                                                                                                    <tr>
+                                                        <td class="col1">
+                                                            执行标的:
+                                                        </td>
+                                                        <td class="col2">
+                                                            12025                                                        </td>
+                                                    </tr>
+                                                                                                                                                    <tr>
+                                                        <td class="col1">
+                                                            执行状态:
+                                                        </td>
+                                                        <td class="col2">
+                                                            已结案                                                        </td>
+                                                    </tr>
+                                                                                                                                                                                                                                                                                            </tbody></table>
+                                                                            </div>
+                                </div>
+                            </li>
+                                                            </ul>
+                        <ul class="table-mark">
+                                            </ul>
+                                        </td>
+                                </tr>
+                                                                                                                            <tr class="risk-items-flag border-bottom-1">
+                                    <td class="risk-item-name">身份证命中中风险关注名单</td>
+                                    <td class="risk-item-level">低</td>
+                                    <td>
+                                                                                                    <div class="description">
+                        <table>
+                            <tbody><tr>
+                                <td style="width:65px; padding:0px;height: 16px!important;vertical-align: top;">规则描述：</td>
+                                <td style="vertical-align:top;word-break: break-all;word-wrap:break-word;padding: 0px;height:16px!important;">
+                                    验证匹配字段是否在欺诈灰名单中
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                                <ul style="margin-top:1px;color:#666;">
+                                            <li><span class="name-detail-em">风险类型：</span>异常借款</li>
+                                                                <li><span class="name-detail-em">匹配字段：</span>借款人身份证</li>
+                                                        </ul>
+                        <ul class="table-mark">
+                                            </ul>
+                                        </td>
+                                </tr>
+                                                                                                                            <tr class="risk-items-flag border-bottom-1">
+                                    <td class="risk-item-name">身份证命中低风险关注名单</td>
+                                    <td class="risk-item-level">低</td>
+                                    <td>
+                                                                                                    <div class="description">
+                        <table>
+                            <tbody><tr>
+                                <td style="width:65px; padding:0px;height: 16px!important;vertical-align: top;">规则描述：</td>
+                                <td style="vertical-align:top;word-break: break-all;word-wrap:break-word;padding: 0px;height:16px!important;">
+                                    验证匹配字段是否在欺诈灰名单中
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                                <ul style="margin-top:1px;color:#666;">
+                                            <li><span class="name-detail-em">风险类型：</span>伪冒风险</li>
+                                                                <li><span class="name-detail-em">匹配字段：</span>借款人身份证</li>
+                                                        </ul>
+                        <ul class="table-mark">
+                                            </ul>
+                                        </td>
+                                </tr>
+                                                                                                                            <tr class="risk-items-flag border-bottom-1">
+                                    <td class="risk-item-name">身份证_姓名命中法院失信模糊名单</td>
+                                    <td class="risk-item-level">中</td>
+                                    <td>
+                                                                                                    <div class="description">
+                        <table>
+                            <tbody><tr>
+                                <td style="width:65px; padding:0px;height: 16px!important;vertical-align: top;">规则描述：</td>
+                                <td style="vertical-align:top;word-break: break-all;word-wrap:break-word;padding: 0px;height:16px!important;">
+                                    模糊证据库为身份证掩码数据,可用身份证+姓名+校验字段组合匹配,确保准确性
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                                <ul style="margin-top:1px;color:#666;">
+                                                                                                                                                <li><span class="name-detail-em">风险类型：</span>法院失信</li>
+                                                                                        <li><span class="name-detail-em">姓名：</span>喻世军</li>
+                                                                                        <li><span class="name-detail-em">模糊身份证：</span>3425241978****2410</li>
+                                                                                        </ul>
+                        <ul class="table-mark">
+                                            </ul>
+                                        </td>
+                                </tr>
+                                                                                                                            <tr class="risk-items-flag border-bottom-1">
+                                    <td class="risk-item-name">手机号命中中风险关注名单</td>
+                                    <td class="risk-item-level">低</td>
+                                    <td>
+                                                                                                    <div class="description">
+                        <table>
+                            <tbody><tr>
+                                <td style="width:65px; padding:0px;height: 16px!important;vertical-align: top;">规则描述：</td>
+                                <td style="vertical-align:top;word-break: break-all;word-wrap:break-word;padding: 0px;height:16px!important;">
+                                    验证匹配字段是否在欺诈灰名单中
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                                <ul style="margin-top:1px;color:#666;">
+                                            <li><span class="name-detail-em">风险类型：</span>异常借款</li>
+                                                                <li><span class="name-detail-em">匹配字段：</span>借款人手机</li>
+                                                        </ul>
+                        <ul class="table-mark">
+                                            </ul>
+                                        </td>
+                                </tr>
+                                                                                                                            <tr class="risk-items-flag border-bottom-1">
+                                    <td class="risk-item-name">手机号命中低风险关注名单</td>
+                                    <td class="risk-item-level">低</td>
+                                    <td>
+                                                                                                    <div class="description">
+                        <table>
+                            <tbody><tr>
+                                <td style="width:65px; padding:0px;height: 16px!important;vertical-align: top;">规则描述：</td>
+                                <td style="vertical-align:top;word-break: break-all;word-wrap:break-word;padding: 0px;height:16px!important;">
+                                    验证匹配字段是否在欺诈灰名单中
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                                <ul style="margin-top:1px;color:#666;">
+                                            <li><span class="name-detail-em">风险类型：</span>伪冒风险</li>
+                                                                <li><span class="name-detail-em">匹配字段：</span>借款人手机</li>
+                                                        </ul>
+                        <ul class="table-mark">
+                                            </ul>
+                                        </td>
+                                </tr>
+                                                                                                                            <tr class="risk-items-flag border-bottom-2">
+                                    <td class="risk-item-name">手机号命中信贷逾期名单</td>
+                                    <td class="risk-item-level">高</td>
+                                    <td>
+                                                                            <ul class="table-mark">
+                                    <li>失信次数: 1</li>
+                                                            <li>逾期金额: 2766.28
+                                                        逾期天数: 7
+                        </li>
+                                                                                            </ul>
+                                        </td>
+                                </tr>
+                                                                                                                                                                
+                                                                                                                                        <tr class="risk-items-flag border-bottom-1">
+                                    <td rowspan="3">多平台借贷申请检测</td>
+                                    <td class="risk-item-name">7天内申请人在多个平台申请借款</td>
+                                    <td class="risk-item-level">高</td>
+                                    <td>
+                                                                            <ul class="table-mark">
+                            <li style="list-style: none; margin-left: -16px;padding-bottom: 3px;">总个数：2</li>
+                            <li>P2P网贷: 1</li>
+                            <li>厂商汽车金融: 1</li>
+                                        <div class="dimension-section">
+                <span class="dimension-title"><i class="iconfont icon-list"></i> 各维度多头详情</span>
+                <ul class="dimension-list">
+                                            <li class="dimension-item">
+                            <span class="dimension-item-title">借款人手机详情:</span>
+                            <ul class="dimension-sub-list">
+                                <li>总个数：2</li>
+                                                                    <li class="dimension-sub-item">P2P网贷: 1</li>
+                                                                    <li class="dimension-sub-item">厂商汽车金融: 1</li>
+                                                            </ul>
+                        </li>
+                                            <li class="dimension-item">
+                            <span class="dimension-item-title">借款人身份证详情:</span>
+                            <ul class="dimension-sub-list">
+                                <li>总个数：2</li>
+                                                                    <li class="dimension-sub-item">P2P网贷: 1</li>
+                                                                    <li class="dimension-sub-item">厂商汽车金融: 1</li>
+                                                            </ul>
+                        </li>
+                                    </ul>
+            </div>
+                            </ul>
+                                        </td>
+                                </tr>
+                                                                                                                            <tr class="risk-items-flag border-bottom-1">
+                                    <td class="risk-item-name">3个月内申请人申请借款平台总数大于等于1且小于3_无本平台</td>
+                                    <td class="risk-item-level">低</td>
+                                    <td>
+                                                                            <ul class="table-mark">
+                            <li style="list-style: none; margin-left: -16px;padding-bottom: 3px;">总个数：1</li>
+                            <li>P2P网贷: 1</li>
+                                        <div class="dimension-section">
+                <span class="dimension-title"><i class="iconfont icon-list"></i> 各维度多头详情</span>
+                <ul class="dimension-list">
+                                            <li class="dimension-item">
+                            <span class="dimension-item-title">借款人手机详情:</span>
+                            <ul class="dimension-sub-list">
+                                <li>总个数：1</li>
+                                                                    <li class="dimension-sub-item">P2P网贷: 1</li>
+                                                            </ul>
+                        </li>
+                                            <li class="dimension-item">
+                            <span class="dimension-item-title">借款人身份证详情:</span>
+                            <ul class="dimension-sub-list">
+                                <li>总个数：1</li>
+                                                                    <li class="dimension-sub-item">P2P网贷: 1</li>
+                                                            </ul>
+                        </li>
+                                    </ul>
+            </div>
+                            </ul>
+                                        </td>
+                                </tr>
+                                                                                                                            <tr class="risk-items-flag border-bottom-2">
+                                    <td class="risk-item-name">24个月内申请人在多个平台申请借款</td>
+                                    <td class="risk-item-level">低</td>
+                                    <td>
+                                                                            <ul class="table-mark">
+                            <li style="list-style: none; margin-left: -16px;padding-bottom: 3px;">总个数：15</li>
+                            <li>互联网金融门户: 1</li>
+                            <li>小额贷款公司: 2</li>
+                            <li>P2P网贷: 10</li>
+                            <li>大型消费金融公司: 1</li>
+                            <li>厂商汽车金融: 1</li>
+                                        <div class="dimension-section">
+                <span class="dimension-title"><i class="iconfont icon-list"></i> 各维度多头详情</span>
+                <ul class="dimension-list">
+                                            <li class="dimension-item">
+                            <span class="dimension-item-title">借款人手机详情:</span>
+                            <ul class="dimension-sub-list">
+                                <li>总个数：13</li>
+                                                                    <li class="dimension-sub-item">互联网金融门户: 1</li>
+                                                                    <li class="dimension-sub-item">小额贷款公司: 1</li>
+                                                                    <li class="dimension-sub-item">P2P网贷: 9</li>
+                                                                    <li class="dimension-sub-item">大型消费金融公司: 1</li>
+                                                                    <li class="dimension-sub-item">厂商汽车金融: 1</li>
+                                                            </ul>
+                        </li>
+                                            <li class="dimension-item">
+                            <span class="dimension-item-title">借款人身份证详情:</span>
+                            <ul class="dimension-sub-list">
+                                <li>总个数：14</li>
+                                                                    <li class="dimension-sub-item">互联网金融门户: 1</li>
+                                                                    <li class="dimension-sub-item">小额贷款公司: 2</li>
+                                                                    <li class="dimension-sub-item">P2P网贷: 9</li>
+                                                                    <li class="dimension-sub-item">大型消费金融公司: 1</li>
+                                                                    <li class="dimension-sub-item">厂商汽车金融: 1</li>
+                                                            </ul>
+                        </li>
+                                    </ul>
+            </div>
+                            </ul>
+                                        </td>
+                                </tr>
+                                                                                                                                            
+                                        <tr class="border-bottom-2">
+                        <td>关联人信息扫描</td>
+                        <td colspan="3"><img src="./pass.png" alt=""></td>
+                    </tr>
+                                                        
+                                        <tr class="border-bottom-2">
+                        <td>客户行为检测</td>
+                        <td colspan="3"><img src="./pass.png" alt=""></td>
+                    </tr>
+                                                        
+                                                </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+                <div class="msk-detail"></div>
+            <!-- kunta(三方基础数据源)调用结果汇总-->
+            <!-- 因为是附录，所以放到最后，后面的加section的请注意-->
+                                   </div>
+        </div>
+    </div>
+    <script src="./watermark.js.下载"></script>
+<script src="./preloanreport.js.下载"></script>
+<script>
+watermark('.inner',"蜂e贷","hzbww@tairanchina.com");
+</script><canvas width="428" height="250"></canvas>
+
+
+
+
+
+</body></html>

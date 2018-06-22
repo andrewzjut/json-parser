@@ -1,0 +1,41 @@
+function watermark(domStr,display,id) {
+    var bg = {
+            width:2900,
+            height:2000,
+            textWidth:428,
+            textHeight:250,
+            font:"italic 24px KaiTi",
+            color:"rgba(0,0,0,.05)",
+            rotate:-30*Math.PI/180,
+
+            translate:{
+                x:-600,
+                y:-200
+            }
+        };
+    var dom = $(domStr);
+    if(dom.length > 0){
+        var text1 = display||"同盾科技";
+        var text2 = id||"";
+        var textWidth1 = text1.replace(/[^\u0000-\u00ff]/g,"aa").length * 12;
+        var textWidth2 = text2.replace(/[^\u0000-\u00ff]/g,"aa").length * 12;
+
+        var canvas = document.createElement("canvas"),
+            context = canvas.getContext("2d");
+        canvas.setAttribute('width',bg.textWidth);
+        canvas.setAttribute('height',bg.textHeight);
+        $('body').append(canvas);
+
+        context.font = bg.font;
+        context.fillStyle = bg.color;
+        context.rotate(bg.rotate);
+        context.fillText(text1,-bg.textHeight/2+(bg.textWidth-textWidth1)/2,bg.textHeight*Math.sin(Math.PI/3) - 50);
+        context.fillText(text2,-bg.textHeight/2+(bg.textWidth-textWidth2)/2,bg.textHeight*Math.sin(Math.PI/3)-20 );
+
+        var data = canvas.toDataURL("image/png");
+
+        dom.css({
+            'background-image':'url('+ data +')'
+        });
+    }
+}

@@ -1,0 +1,66 @@
+{
+    "_id" : "57f868d9e4b05e4f7a7d7272",
+    "_class" : "com.tairan.cloud.credit.domain.zhicheng.ZhiChengReport",
+    "name" : "张建",
+    "idType" : "101",
+    "idcard" : "650202198504110715",
+    "queryReason" : "10",
+    "data" : {
+        "zcScore" : {
+            "creditScore" : 482,
+            "rate" : "25.45%"
+        },
+        "orgCredit" : {
+            "queryStastics" : {
+                "timesByOtherOrg" : 2,
+                "timesByCurrentOrg" : 0,
+                "eachOrgTypeCount" : [ 
+                    {
+                        "orgType" : "P2P类",
+                        "orgTypeCode" : 1001,
+                        "orgCount" : 2
+                    }
+                ],
+                "otherOrgCount" : 2
+            },
+            "queryHistory" : [ 
+                {
+                    "lastQueryTime" : "2016/07/20",
+                    "queryOrg" : "其他机构1",
+                    "queryOrgTypeCode" : "1001",
+                    "queryOrgType" : "P2P类"
+                }, 
+                {
+                    "lastQueryTime" : "2016/07/08",
+                    "queryOrg" : "其他机构2",
+                    "queryOrgTypeCode" : "1001",
+                    "queryOrgType" : "P2P类"
+                }
+            ]
+        },
+        "reportId" : "201610081132410001",
+        "loanInfo" : {
+            "loanRecords" : [ 
+                {
+                    "approveStatus" : "未通过",
+                    "amount" : "(50000,100000]",
+                    "approveStatusCode" : "203",
+                    "loanTime" : "2016",
+                    "currentStatus" : "---",
+                    "currentStatusCode" : "---"
+                }
+            ],
+            "overdue" : {
+                "overdueTimes" : 0,
+                "90overdueTimes" : 0,
+                "180overdueTimes" : 0
+            }
+        },
+        "blackList" : {
+            "riskItems" : []
+        },
+        "reportTime" : "2016-10-08 11:32:41"
+    },
+    "status" : 0,
+    "timestamp" : 1475897561957
+}

@@ -1,0 +1,18 @@
+{
+    "formatters" : [
+      {
+        "formatter_id" : "VALUE_24MTHS_PAYMENT_DESCRIPTION",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.SplitAndAddValueBuilder",
+        "parameters" : ""
+      }
+    ],
+    
+    "values" : [
+      {
+        "formatter_id" : "VALUE_24MTHS_PAYMENT_DESCRIPTION",
+        "depth" : 5,
+        "pattern" : "nfcs_data_loanDetail+_\\d+_24mthsPaymentDescription"
+      }
+    ]
+}

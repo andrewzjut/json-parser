@@ -1,0 +1,119 @@
+{
+    "_id" : ObjectId("57f893b8e4b0fa54de4330e0"),
+    "_class" : "com.tairan.cloud.credit.domain.nfcs.NfcsCreditReport",
+    "idType" : "0",
+    "idNo" : "650202198504110715",
+    "data" : {
+        "loanAbstract_repaymentMth" : "",
+        "guaranteeInfo" : [ 
+            {
+                "sourceTime" : "2016.08.20",
+                "project" : "",
+                "amt" : "",
+                "projectTime" : "",
+                "relationship" : ""
+            }
+        ],
+        "number_cellphone" : "",
+        "loanAbstract_maxCreditAmt" : "",
+        "unmber_idcard" : "650202198504110715",
+        "loanAbstract_currentOverdueAmt" : "",
+        "creditTips" : [],
+        "spouseInfo_realname" : "",
+        "cellPhoneSourceTime" : "2016.08.20",
+        "loanAbstract_currentLoanLeft" : "",
+        "spouseInfo_cellPhone" : "",
+        "diploma" : "大学专科和专科学校",
+        "loanAbstract_currentLoanCnt" : "",
+        "spouseInfo_gender" : "",
+        "personalStatement" : [ 
+            {
+                "personalStatement_description" : "",
+                "personalStatement_sourceTime" : "",
+                "personalStatement_num" : ""
+            }
+        ],
+        "loanAbstract_maxOverdueAmt" : "",
+        "sex_user" : "男性",
+        "spouseInfo_idNo" : "",
+        "specialDeal" : [ 
+            {
+                "modifyMonth" : "",
+                "recordType" : "",
+                "sourceTime" : "",
+                "amt" : "",
+                "time" : "",
+                "detail" : "",
+                "recordSource" : ""
+            }
+        ],
+        "reportTime" : "2016.10.08 11:13:45",
+        "realname_user" : "张建",
+        "applyHistoryAddress" : [ 
+            {
+                "sourceTime" : "2016.08.20",
+                "home" : "陕西西安市户县西安市高陵区泾河工业园旅游"
+            }
+        ],
+        "reportNum" : "673173165075290489503479",
+        "birthday_user" : "1985.04.11",
+        "homePhoneSourceTime" : "2016.08.20",
+        "loanAbstract_currentLoanAmt" : "",
+        "type_user" : "身份证",
+        "positionCaption" : "未知",
+        "emailSourceTime" : "2016.08.20",
+        "spouseInfo_workUnitSourceTime" : "",
+        "jobInfo" : [ 
+            {
+                "workUnit" : "中国石油天然气运输有限公司长庆运输分公司",
+                "occupation" : "不便分类的其他从业人员",
+                "sourceTime" : "2016.08.20"
+            }
+        ],
+        "loanReportQueryRecord" : [],
+        "spouseInfo_birthday" : "",
+        "loanReportFirstContact" : [ 
+            {
+                "name" : "黄晨恩",
+                "sourceTime" : "2016.08.20",
+                "relationship" : "兄弟姐妹",
+                "cellPhone" : "1839966XXXX"
+            }
+        ],
+        "spouseInfo_idType" : "",
+        "loanDetail" : [],
+        "loanAbstract_firstLoanTime" : "",
+        "loanReportSecondContact" : [ 
+            {
+                "name" : "黄晨恩",
+                "sourceTime" : "2016.08.20",
+                "relationship" : "兄弟姐妹",
+                "cellPhone" : "1839966XXXX"
+            }
+        ],
+        "email" : "",
+        "diplomaSourceTime" : "2016.08.20",
+        "reportId" : "201610081120300001",
+        "positionCaptionSourceTime" : "2016.08.20",
+        "number_telephone" : "",
+        "queryReason" : "未知原因",
+        "loanAbstract_maxOverdueCnt" : "",
+        "marriagestatus" : "已婚",
+        "spouseInfo_workUnit" : "",
+        "spouseInfo_cellPhoneSourceTime" : "",
+        "marriageSourceTime" : "2016.08.20",
+        "loanApplyAbstract" : [ 
+            {
+                "mths" : "",
+                "org" : "",
+                "sourceTime" : "2016.08.20",
+                "amt" : "",
+                "time" : "",
+                "type" : "",
+                "status" : ""
+            }
+        ]
+    },
+    "status" : 0,
+    "timestamp" : NumberLong(1475908536231)
+}

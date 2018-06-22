@@ -1,0 +1,69 @@
+{
+  "_id" : "57e23a05e4b0df34b49465f8",
+  "_class" : "com.tairan.cloud.credit.domain.zhicheng.ZhiChengReport",
+  "name" : "鲁赞海",
+  "idType" : "101",
+  "idcard" : "362321198406246819",
+  "queryReason" : "10",
+  "data" : {
+    "zcScore" : {
+      "creditScore" : 506,
+      "rate" : "25.45%"
+    },
+    "orgCredit" : {
+      "queryStastics" : {
+        "timesByOtherOrg" : 1,
+        "timesByCurrentOrg" : 0,
+        "eachOrgTypeCount" : [
+          {
+            "orgType" : "P2P类",
+            "orgTypeCode" : 1001,
+            "orgCount" : 1
+          }
+        ],
+        "otherOrgCount" : 1
+      },
+      "queryHistory" : [
+        {
+          "lastQueryTime" : "2016/01/19",
+          "queryOrg" : "其他机构1",
+          "queryOrgTypeCode" : "1001",
+          "queryOrgType" : "P2P类"
+        }
+      ]
+    },
+    "loanInfo" : {
+      "loanRecords" : [
+        {
+          "approveStatus" : "通过",
+          "amount" : "(100000,+)",
+          "approveStatusCode" : "202",
+          "loanTime" : "2016",
+          "currentStatus" : "正常",
+          "currentStatusCode" : "301"
+        }
+      ],
+      "overdue" : {
+        "overdueTimes" : 0,
+        "90overdueTimes" : 0,
+        "180overdueTimes" : 0
+      }
+    },
+    "blackList" : {
+      "riskItems" : [
+        {
+          "type" : "金融危机",
+          "typeCode" : "1001",
+          "value" : "0",
+          "riskType" : "高级",
+          "riskTypeCode" : "110",
+          "source" : "机要网",
+          "sourceCode" : "120",
+          "riskTime" : "2016.01.01"
+        }
+      ]
+    }
+  },
+  "status" : 0,
+  "timestamp" : 1474443781109
+}

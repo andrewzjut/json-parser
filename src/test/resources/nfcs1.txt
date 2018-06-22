@@ -1,0 +1,166 @@
+{
+    "_id" : "57f88514e4b0fa54de4330ad",
+    "_class" : "com.tairan.cloud.credit.domain.nfcs.NfcsCreditReport",
+    "idType" : "0",
+    "idNo" : "430203198208064019",
+    "data" : {
+        "loanAbstract_repaymentMth" : "0",
+        "guaranteeInfo" : [ 
+            {
+                "sourceTime" : "2016.08.22",
+                "project" : "",
+                "amt" : "",
+                "projectTime" : "",
+                "relationship" : ""
+            }
+        ],
+        "number_cellphone" : "1334733XXXX",
+        "loanAbstract_maxCreditAmt" : "0",
+        "unmber_idcard" : "430203198208064019",
+        "loanAbstract_currentOverdueAmt" : "0",
+        "creditTips" : [ 
+            {
+                "progect" : "",
+                "sourceTime" : "2016.09.30",
+                "description" : "申请笔数 = 2"
+            }
+        ],
+        "spouseInfo_realname" : "",
+        "cellPhoneSourceTime" : "2016.08.22",
+        "loanAbstract_currentLoanLeft" : "0",
+        "spouseInfo_cellPhone" : "",
+        "diploma" : "未知",
+        "loanAbstract_currentLoanCnt" : "0",
+        "spouseInfo_gender" : "",
+        "personalStatement" : [ 
+            {
+                "personalStatement_description" : "",
+                "personalStatement_sourceTime" : "",
+                "personalStatement_num" : ""
+            }
+        ],
+        "loanAbstract_maxOverdueAmt" : "0",
+        "sex_user" : "男性",
+        "spouseInfo_idNo" : "",
+        "specialDeal" : [ 
+            {
+                "modifyMonth" : "",
+                "recordType" : "",
+                "sourceTime" : "",
+                "amt" : "",
+                "time" : "",
+                "detail" : "",
+                "recordSource" : ""
+            }
+        ],
+        "reportTime" : "2016.09.30 14:06:08",
+        "realname_user" : "林志强",
+        "applyHistoryAddress" : [ 
+            {
+                "sourceTime" : "2016.08.22",
+                "home" : "湖南株洲石峰株洲市石峰区时代社区眼步塘4"
+            }, 
+            {
+                "sourceTime" : "2016.08.22",
+                "home" : "石峰区时代社区眼步塘43号"
+            }
+        ],
+        "reportNum" : "301104012360382038647651",
+        "birthday_user" : "1982.08.06",
+        "homePhoneSourceTime" : "2016.08.22",
+        "loanAbstract_currentLoanAmt" : "0",
+        "type_user" : "身份证",
+        "positionCaption" : "未知",
+        "emailSourceTime" : "2016.08.22",
+        "spouseInfo_workUnitSourceTime" : "",
+        "jobInfo" : [ 
+            {
+                "workUnit" : "株洲时代新材料科技股份有限责任公司",
+                "occupation" : "未知",
+                "sourceTime" : "2016.08.22"
+            }, 
+            {
+                "workUnit" : "株洲时代新材料科技股份有限公司",
+                "occupation" : "不便分类的其他从业人员",
+                "sourceTime" : "2016.08.22"
+            }
+        ],
+        "loanReportQueryRecord" : [ 
+            {
+                "reason" : "贷款审批",
+                "org" : "01.P2P机构",
+                "time" : "2016.09.30 13:50:57"
+            }, 
+            {
+                "reason" : "未知原因",
+                "org" : "02.P2P机构",
+                "time" : "2016.09.30 13:50:47"
+            }, 
+            {
+                "reason" : "未知原因",
+                "org" : "03.P2P机构",
+                "time" : "2016.09.30 13:50:37"
+            }, 
+            {
+                "reason" : "未知原因",
+                "org" : "04.P2P机构",
+                "time" : "2016.09.30 13:50:23"
+            }, 
+            {
+                "reason" : "未知原因",
+                "org" : "05.P2P机构",
+                "time" : "2016.09.30 12:50:57"
+            }
+        ],
+        "spouseInfo_birthday" : "",
+        "loanReportFirstContact" : [ 
+            {
+                "name" : "林志强",
+                "sourceTime" : "2016.08.22",
+                "relationship" : "其他",
+                "cellPhone" : "1334733XXXX"
+            }, 
+            {
+                "name" : "袁焰",
+                "sourceTime" : "2016.08.22",
+                "relationship" : "配偶",
+                "cellPhone" : "1597331XXXX"
+            }
+        ],
+        "spouseInfo_idType" : "",
+        "loanDetail" : [],
+        "loanAbstract_firstLoanTime" : "",
+        "loanReportSecondContact" : [ 
+            {
+                "name" : "林志强",
+                "sourceTime" : "2016.08.22",
+                "relationship" : "其他",
+                "cellPhone" : "1334733XXXX"
+            }
+        ],
+        "email" : "",
+        "diplomaSourceTime" : "2016.08.22",
+        "reportId" : "201609301414150001",
+        "positionCaptionSourceTime" : "2016.08.22",
+        "number_telephone" : "",
+        "queryReason" : "贷款审批",
+        "loanAbstract_maxOverdueCnt" : "0",
+        "marriagestatus" : "未说明婚姻状况",
+        "spouseInfo_workUnit" : "",
+        "spouseInfo_cellPhoneSourceTime" : "",
+        "marriageSourceTime" : "2016.08.22",
+        "loanApplyAbstract" : [ 
+            {
+                "mths" : "",
+                "org" : "",
+                "sourceTime" : "2016.08.22",
+                "amt" : "",
+                "time" : "",
+                "type" : "",
+                "status" : ""
+            }
+        ]
+    },
+    "status" : 0,
+    "timestamp" : 1475904788783
+}

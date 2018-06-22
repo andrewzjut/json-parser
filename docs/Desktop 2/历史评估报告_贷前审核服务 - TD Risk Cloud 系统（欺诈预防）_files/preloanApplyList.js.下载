@@ -1,0 +1,1194 @@
+/**
+ * Created by Session on 16/1/7.
+ */
+$(function () {
+    var G_VAR = {
+        isAdvance: $('[name="isAdvance"]').val() == 'true' ? true : false,
+        setDefScanPeriod: $('[name="setDefScanPeriod"]').val()
+    };
+
+    var selectedReportCount = 0;
+    var indexCheckbox = 0;
+    var regAddLoanLimit = new RegExp(/^[1-9]\d*$/); //检测正整数
+    //初始化添加贷后监控overlay模板
+    var initAddLoanTpl = $('#addLoanMonitorTpl').html();
+    var addMonitorLightBox = 'personal-add-monitor';
+    var allRules = [];
+
+    //获取所有的规则
+    var ruleNameReq = undefined;
+    getRuleList();
+    checkConditionIsReportId();
+
+    // 初始设置开始时间和结束时间
+    var startTime = moment().set({
+        hour: 0,
+        minute: 0,
+        second: 0,
+        millisecond: 0
+    }).subtract(6, 'days').format('YYYY-MM-DD HH:mm:ss');
+    var endTime = moment().format('YYYY-MM-DD HH:mm:ss');
+    if (!location.search) {
+        $("#startDate").val(startTime);
+        $("#endDate").val(endTime);
+    }
+
+    // 时间检查函数
+    var timeChecked = function(){
+        var back = false;
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var startTime = (new Date(startDate.replace(/-/g,'/'))).getTime();
+        var endTime = (new Date(endDate.replace(/-/g,'/'))).getTime();
+
+        var now = new Date();
+        now.setFullYear(now.getFullYear()-1);
+
+        if(startTime < now.getTime()){
+            back = '对不起，目前支持的最早回溯时间为12个月。';
+        }else if(endTime - startTime > 90*24*60*60*1000){
+            back = '对不起，目前支持的最大搜索时间范围为90天。';
+        }
+        return back;
+    }
+
+
+    // overlay函数
+    var showOverlay = function (lightBox) {
+        // var lightBox = lightBox || 'overlay-main';
+        $('.overlay-mask').fadeIn(200);
+        $('.' + lightBox).fadeIn(200);
+    };
+    var hideOverlay = function () {
+        $('.overlay-main').fadeOut(200, function () {
+            $(this).removeAttr('style');
+        });
+        $('.overlay-mask').fadeOut(200, function () {
+            $(this).removeAttr('style');
+        });
+    };
+    var doMiddleOverlay = function (lightBox) {
+        $('.' + lightBox).css({
+            'margin-top': -($('.' + lightBox).height() / 2 + 36) + 'px'
+        });
+    };
+    $('.overlay-close, .overlay-close-btn, .overlay-mask').on('click', function () {
+        hideOverlay();
+    });
+
+    //添加贷后监控按钮样式和选中序号获取函数
+    function getIndexCheckbox(tableCheckbox, count) {
+        if (count === 1) {
+            for (var i = 0; i < tableCheckbox.length; i++) {
+                if (tableCheckbox[i].checked) {
+                    indexCheckbox = i;
+                }
+            }
+            $("#addLoanMonitor").css("background", "#2ea5ff");
+        }
+        else {
+            $("#addLoanMonitor").css("background", "#d3d3d3");
+        }
+        selectedReportCount = count;
+        return count;
+    }
+
+    //邮箱验证
+    var regEmail = /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9_\-]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$/;
+
+    //查询方式
+    var invode_mode_init_value = $('#invoke_mode_input').val();
+    var invode_mode_init_index = $('#invoke_mode_select').selectByValue(invode_mode_init_value);
+    $("#invoke_mode_select").selectInit({
+        selectIndex: invode_mode_init_index,
+        callback: function (index, selectObj) {
+            var v = selectObj.value || '';
+            $("#invoke_mode_input").val(v);
+        }
+    });
+
+    //扫描建议
+    var decision_init_value = $('#decision_input').val();
+    var decision_init_index = $('#decision_select').selectByValue(decision_init_value);
+    $("#decision_select").selectInit({
+        selectIndex: decision_init_index,
+        callback: function (index, selectObj) {
+            var v = selectObj.value || '';
+            $("#decision_input").val(v);
+        }
+    });
+
+    //分组信息
+    var group_init_value = $('#group_input').val();
+    var group_init_index = $('#group_select').selectByValue(group_init_value);
+    $("#group_select").selectInit({
+        selectIndex: group_init_index,
+        callback: function (index, selectObj) {
+            var v = selectObj.value || '';
+            $("#group_input").val(v);
+        }
+    });
+
+    var hideSize = $("#hidePageSize").val();
+    var hideSizeIndex = $("#pagesize-select").selectByValue(hideSize);
+    $("#pagesize-select").selectInit({
+        selectIndex: hideSizeIndex,
+        callback: function (index, selectObj) {
+            var size = selectObj.value || '';
+            $("#hidePageSize").val(size);
+        }
+    });
+
+    //初始化select
+    var searchCatInput = $("#search_cat_input").val();
+    var searchCatInputIndex = $("#search_cat_select").selectByValue(searchCatInput);
+    $("#search_cat_select").selectInit({
+        selectIndex: searchCatInputIndex,
+        callback: function (index, selectObj) {
+            var searchCat = selectObj.value || '';
+            $("#search_cat_input").val(searchCat);
+            checkConditionIsReportId();
+        }
+    });
+
+    //全选checkbox绑定事件
+    $('#choose-all').on('click', function () {
+        var _this = $(this);
+        var tableCheckbox = $('.table-list tbody').find(':checkbox');
+        //检测全选时是否只有一条记录
+        if (tableCheckbox.length == 1) {
+            getIndexCheckbox('', 1);
+        }
+        else {
+            getIndexCheckbox('', 2);
+        }
+        //由于jquery版本原因此处要是用prop来获取checked属性
+        if (_this.prop('checked')) {
+            tableCheckbox.prop('checked', true);
+            $('#report-export-submit').removeClass('download-disabled');//.css('background', '#2EA5FF');//有勾选则可用
+            $('#report-export-submit').removeAttr('disabled');
+        } else {
+            tableCheckbox.prop('checked', false);
+            $('#report-export-submit').addClass('download-disabled');//.css('background', '#D3D3D3');//如果没有勾选报告导出按钮不可用
+            $('#report-export-submit').attr('disabled', true);
+            getIndexCheckbox('', 0);
+        }
+    });
+
+    //table中的checkbox绑定事件
+    $('.table-list tbody').on("click", ":checkbox", function () {
+        var tableCheckbox = $('.table-list tbody').find(':checkbox');
+        var count = 0;//用于判断用户时候勾选了所有选项
+        for (var i = 0; i < tableCheckbox.length; i++) {
+            if (tableCheckbox[i].checked) {
+                count++;
+            }
+        }
+        getIndexCheckbox(tableCheckbox, count);
+        if (count == tableCheckbox.length) {
+            $("#choose-all").prop("checked", true);//如果勾选了所有选项,则全选框勾选
+        } else {
+            $("#choose-all").prop("checked", false);//如果所有选项没有勾选完,则不勾选全选框
+        }
+        if (count == 0) {
+            $("#report-export-submit").addClass('download-disabled');//.css("background", "#D3D3D3");//如果没有勾选报告导出按钮不可用
+            $("#report-export-submit").attr("disabled", true);
+        } else {
+            $("#report-export-submit").removeClass('download-disabled');//.css("background", "#2EA5FF");//有勾选则可用
+            $("#report-export-submit").removeAttr("disabled");
+        }
+    });
+
+    //创建导出任务按钮初始化为不可用
+    $("#report-export-submit").addClass('download-disabled');//.css("background", "#D3D3D3");//如果没有勾选报告导出按钮不可用
+    $("#report-export-submit").attr("disabled", true);
+
+    //查询
+    var loadPgaeInfo = function () {
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var startTime = (new Date(startDate)).getTime();
+        var endTime = (new Date(endDate)).getTime();
+        var invoke_mode = $("#invoke_mode_input").val();
+        var decision = $("#decision_input").val();
+        var group = $("#group_input").val();
+        var minScore = $('#min-score').val();
+        minScore = minScore ? parseInt(minScore) : 0;
+        var maxScore = $('#max-score').val();
+        maxScore = maxScore ? parseInt(maxScore) : 100;
+        var searchCat = $("#search_cat_input").val();
+        var searchValue = $("#search-value").val();
+        var ruleName = $("input","#ruleName").val();
+        var pageSize = Math.max(10, $("#hidePageSize").val() | 0);
+        var curPage = Math.max(1, $('#curPage').val() | 0);
+
+        // 不需要判断大小
+        /*if (minScore > maxScore) {
+            $.message.pop('分数区间下限需要小于分数区间上限', 'warning');
+            return false;
+        }*/
+
+        if (startTime > endTime) {
+            alert('开始时间不得大于结束时间');
+            return false;
+        }
+        window.location.replace("./preLoanReportHistory.htm?operationType=queryReportList" +
+            "&curPage=" + curPage +
+            "&pageSize=" + pageSize +
+            "&begin_time=" + startDate +
+            "&end_time=" + endDate +
+            "&invoke_mode=" + invoke_mode +
+            "&decision=" + decision +
+            "&search_cat=" + searchCat +
+            "&search_value=" + searchValue +
+            "&rule_name=" + ruleName +
+            "&group=" + group +
+            "&min_score=" + minScore +
+            "&max_score=" + maxScore
+        );
+    }
+
+    $("#search-value").on('keyup',function(){
+        checkConditionIsReportId();
+    });
+
+    function checkConditionIsReportId(){
+        var searchCat = $("#search_cat_input").val();
+        var searchValue = $("#search-value").val();
+        if((searchCat=='report_id'&&searchValue!='')||(searchCat=='application_id'&&searchValue!='')){
+            $('#condition-form-export').hide();
+            $('#report-export-submit-lg').hide();
+        }else{
+            $('#condition-form-export').show();
+            $('#report-export-submit-lg').show();
+        }
+    }
+
+    $("#condition-form-search").on("click", function () {
+        var searchCat = $("#search_cat_input").val();
+        var searchValue = $("#search-value").val();
+        var isSpecial = false;
+        if((searchCat=='report_id'&&searchValue!='')||(searchCat=='application_id'&&searchValue!='')){
+            isSpecial = true;
+        }else{
+            isSpecial = false;
+        }
+
+        var timeBack = isSpecial ? false : timeChecked();
+        if(timeBack){
+            $.message.pop(timeBack, 'warning');
+            return
+        }
+        $('#curPage').val(1);
+        loadPgaeInfo();
+    });
+
+    //每页显示条数
+    $(".changePageSize li").on("click", function () {
+        $('#curPage').val(1);
+        loadPgaeInfo();
+    });
+
+    // 分页
+    $("#pager").pager({
+        skip:true,
+        pagenumber: Math.max($("#curPage").val() | 0, 1),
+        pagecount: Math.max($("#totalPage").val() | 0, 1),
+        buttonClickCallback: function (pageclickednumber) {
+            $('#curPage').val(pageclickednumber);
+            loadPgaeInfo();
+        }
+    });
+    //判断skipIndex的值
+    $("#skip-index").on('keyup', function () {
+        var _this = $(this);
+        var value = _this.val().replace(/[^\d]/g, '');
+        if ( value > 0 && value <= parseInt($("#totalPage").val().trim())) {
+            _this.val(value);
+        } else {
+            _this.val("");
+        }
+    });
+    //跳转
+    $(".skip-btn").on('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        if($("#skip-index").val().trim()){
+            $('#curPage').val($("#skip-index").val().trim());
+        }else{
+            return false;
+        }
+        loadPgaeInfo();
+    });
+    //列表导出
+    var getExportFile = function (software) {
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var startTime = (new Date(startDate)).getTime();
+        var endTime = (new Date(endDate)).getTime();
+        var invoke_mode = $("#invoke_mode_input").val();
+        var decision = $("#decision_input").val();
+        var group = $("#group_input").val();
+        var minScore = $('#min-score').val();
+        var maxScore = $('#max-score').val();
+        var searchCat = $("#search_cat_input").val();
+        var searchValue = $("#search-value").val();
+        var ruleName = $("input","#ruleName").val();
+
+        /*if (minScore > maxScore) {
+            $.message.pop('分数区间下限需要小于分数区间上限', 'warning');
+            return false;
+        }*/
+
+        if (startTime > endTime) {
+            alert('开始时间不得大于结束时间');
+            return false;
+        }
+
+        $('#export-tmp')
+            .attr('src', './preLoanReportHistory.json?operationType=exportList' +
+                "&begin_time=" + startDate +
+                "&end_time=" + endDate +
+                "&invoke_mode=" + invoke_mode +
+                "&decision=" + decision +
+                "&search_cat=" + searchCat +
+                "&search_value=" + searchValue +
+                "&rule_name=" + ruleName +
+                "&group=" + group +
+                "&min_score=" + minScore +
+                "&max_score=" + maxScore+
+                "&software="+software)
+            .one('load', function (e) {
+                var iframe = $('#export-tmp').get(0);
+                var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                var tipText = '';
+                if ($(iframeDoc).text()) {
+                    try {
+                        tipText = JSON.parse($(iframeDoc).text()).msg;
+                    } catch (e) {
+                        tipText = $(iframeDoc).text();
+                    }
+                    $.message.pop(tipText || '导出列表失败', 'warning');
+                    return false;
+                }
+            });
+    }
+
+    $('#condition-form-export').on('click', function () {
+        var timeBack = timeChecked();
+        if(timeBack){
+            $.message.pop(timeBack, 'warning');
+            return
+        }
+        showOverlay('read-mode');
+        doMiddleOverlay('read-mode');
+        /*if (navigator.userAgent.indexOf('Mac OS X') != -1) {
+         showOverlay('read-mode');
+         doMiddleOverlay('read-mode');
+         } else {
+         $(".export-read-mode").val('office');
+         $('#condition-form form').ajaxSubmit({
+         beforeSerialize: function ($form, options) {
+         options.data = {app_name: $('#app-select').val()}
+         },
+         beforeSubmit: function (arr, $form, options) {
+         getExportFile();
+         return false;
+         }
+         });
+         }*/
+    });
+    //点击office
+    $("#office").on('click', function () {
+        hideOverlay('read-mode');
+        $(".export-read-mode").val('office');
+        $('#condition-form form').ajaxSubmit({
+            beforeSerialize: function ($form, options) {
+                options.data = {app_name: $('#app-select').val(),software:'office'}
+            },
+            beforeSubmit: function (arr, $form, options) {
+                getExportFile('office');
+                return false;
+            }
+        });
+
+    });
+    //点击numbers
+    $("#numbers").on('click', function () {
+        $(".export-read-mode").val('numbers');
+        hideOverlay("read-mode");
+        $('#condition-form form').ajaxSubmit({
+            beforeSerialize: function ($form, options) {
+                options.data = {app_name: $('#app-select').val(),software:'numbers'}
+            },
+            beforeSubmit: function (arr, $form, options) {
+                getExportFile('numbers');
+                return false;
+            }
+        });
+    });
+    $('.read-mode .overlay-close').on('click', function () {
+        hideOverlay('read-mode');
+    });
+    // 提示事件
+    $('#report-export-submit-lg').hover(function(){
+        var that = $(this).offset();
+        $('.tip').show();
+    },function(){
+        $('.tip').hide();
+    });
+    
+    //初始化导出操作
+    function initExportOperate() {
+        $(".condition-form .report-export").removeClass('download-disabled');
+
+        var count = 0;//用于判断用户时候勾选了所有选项
+        var tableCheckbox = $('.table-list tbody').find(':checkbox');
+        for (var i = 0; i < tableCheckbox.length; i++) {
+            if (tableCheckbox[i].checked) {
+                count++;
+            }
+        }
+        if(count > 0){
+            $(".report-export-operate .report-export").removeClass('download-disabled');
+        }
+        //.css("display", "block");
+        $(".export-process").hide();//.css("display", "none");
+        $('.export-btn-wrap').css({
+            'margin-right': 0
+        })
+        $(".export-process .export-processing").css("width", 0);
+        $(".export-process .export-processing span").text("0%");
+    }
+
+    $("#report-export-submit").on("click", function () {
+        var report_id_list = [];
+        var checkedRows = $('.table-list tbody').find(":checked").parents("tr");
+        var reportIds = checkedRows.find(".export-report-id");
+        var reportAppNames = checkedRows.find(".export-report-name");
+        for (var i = 0; i < reportIds.length; i++) {
+            var reportId = reportIds.eq(i).text();
+            var reportAppName = reportAppNames.eq(i).val();
+            var paramObj = {};
+            paramObj['app_name'] = reportAppName;
+            paramObj['report_id'] = reportId;
+            report_id_list.push(paramObj);
+        }
+
+        var paramData = {};
+
+        if (report_id_list.length == 1) {
+            paramData['app_name'] = report_id_list[0]['app_name'];
+            paramData['report_id'] = report_id_list[0]['report_id'];
+            doExport(paramData);
+        } else if (report_id_list.length > 1) {
+            paramData['report_id_list'] = JSON.stringify(report_id_list);
+            doBatchExport(paramData);
+        }
+
+    });
+    $("#report-export-submit-lg").on("click", function () {
+        var timeBack = timeChecked();
+        if(timeBack){
+            $.message.pop(timeBack, 'warning');
+            return
+        }
+
+        $.message.confirm('您确定要批量导出么？', '批量导出提示', function (flag) {
+            if (flag) {
+                doAllExport();
+            }
+        });
+    });
+
+    //导出报告，向服务器发送导出请求
+    var buildExportXhrCache = 0;
+    //获取任务进度
+    function progressFun(str){
+        var count = 0;
+        $(".condition-form .report-export").addClass("download-disabled");
+        $(".condition-form .export-process").show();
+        $('.export-btn-wrap').css({
+            'margin-right': '50px'
+        })
+
+        // var sourcepdfUrl = location.pathname.split('/').slice(0,-1);
+        // sourcepdfUrl.push('preLoanReportHistory.json?operationType=gotoExportUrl')
+        // sourcepdfUrl = sourcepdfUrl.join('/');
+
+        var fileProcessXhrCache = 0;
+        var fileProcess = setInterval(function () {
+            if (fileProcessXhrCache) {
+                return false;
+            }
+            fileProcessXhrCache = 1;
+            $.ajax({
+                type: 'get',
+                url: 'preLoanReportHistory.json?operationType=checkExportStatus',
+                dataType: 'json',
+                cache: false,
+                async: false
+            }).done(function (data) {
+                data = data ? data : {};
+                data.attr = data.attr ? data.attr : {};
+                if (data.success) {
+                    if (data.attr.status == "RUNING") {
+                        count = data.attr.percentages.toFixed(1);
+                        $(".condition-form .export-process .export-processing").css("width", count + "%");
+                        $(".condition-form .export-process .export-processing span").text(count + "%");
+                    } else if (data.attr.status == "SUCCESS") {
+                        $.message.pop("加载成功，浏览器正在下载", "success");
+                        // if(str != undefined){
+                        $("#download-report-wrap").find("iframe").attr("src", 'https://'+data.attr.url);
+                        // }else{
+                        //     $("#download-report-wrap").find("iframe").attr("src", sourcepdfUrl);
+                        // }
+                        initExportOperate();
+                        clearInterval(fileProcess);
+                        buildExportXhrCache = 0;
+                    } else if (data.attr.status == "UNSTART") {
+                        $.message.pop("服务器发生错误", "warning");
+                        initExportOperate();
+                        clearInterval(fileProcess);
+                        buildExportXhrCache = 0;
+                    } else if (data.attr.status == "FAILED") {
+                        $.message.pop("请求数据失败", "warning");
+                        initExportOperate();
+                        clearInterval(fileProcess);
+                        buildExportXhrCache = 0;
+                    }
+                } else {
+                    $.message.pop(data.msg, "warning");
+                }
+            }).fail(function () {
+                $.message.pop("发送请求失败", "warning")
+            }).always(function () {
+                fileProcessXhrCache = 0;
+            });
+        }, 1000);
+    }
+    // 条件内全部导出
+    function doAllExport(){
+        if (buildExportXhrCache) {
+            $.message.pop("请不要快速重复提交", "warning");
+            return;
+        }
+
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var startTime = (new Date(startDate)).getTime();
+        var endTime = (new Date(endDate)).getTime();
+        var invoke_mode = $("#invoke_mode_input").val();
+        var decision = $("#decision_input").val();
+        var group = $("#group_input").val();
+        var minScore = $('#min-score').val();
+        var maxScore = $('#max-score').val();
+        var searchCat = $("#search_cat_input").val();
+        var searchValue = $("#search-value").val();
+        var ruleName = $("input","#ruleName").val();
+
+        /*if (minScore > maxScore) {
+            $.message.pop('分数区间下限需要小于分数区间上限', 'warning');
+            return false;
+        }*/
+
+        if (startTime > endTime) {
+            alert('开始时间不得大于结束时间');
+            return false;
+        }
+        buildExportXhrCache = 1;
+        $.ajax({
+            type: 'post',
+            // url: 'preLoanReport.json',
+            url: 'preLoanReportHistory.json',
+            data: {
+                "operationType":"exportReportAdvanced",
+                "begin_time" : startDate ,
+                "end_time" : endDate ,
+                "invoke_mode" : invoke_mode ,
+                "decision" : decision ,
+                "search_cat" : searchCat ,
+                "search_value" : searchValue ,
+                "rule_name" : ruleName ,
+                "group" : group ,
+                "min_score" : minScore ,
+                "max_score" : maxScore
+            },
+            dataType: 'json',
+            cache: false,
+        }).done(function (result) {
+            result = result ? result : {};
+            result.attr = result.attr ? result.attr : {};
+            if (result.success) {
+                if (result.attr.status == "SUCCESS") {
+                    $("#download-report-wrap").find("iframe").attr("src", 'https://' + result.success.url);
+                    buildExportXhrCache = 0;
+                } else if (result.attr.status == "RUNING") {
+                    $.message.pop("正在加载，请稍等", "success");
+                    progressFun('doAllExport');
+                } else if (result.attr.status == "FAILED") {
+                    $.message.pop("部分报告未找到", "warning");
+                    buildExportXhrCache = 0;
+                } else if (result.attr.status == "UNSTART") {
+                    $.message.pop("任务尚未启动", "warning");
+                    buildExportXhrCache = 0;
+                }
+            } else {
+                $.message.pop(result.msg, "warning");
+                buildExportXhrCache = 0;
+                initExportOperate();
+            }
+        }).fail(function(err){
+            $.message.pop("发送请求失败", "warning");
+            buildExportXhrCache = 0;
+        }).always(function(){
+            // buildExportXhrCache = 0;
+        });
+
+    }
+    //批量导出
+    function doBatchExport(paramData){
+        if (buildExportXhrCache) {
+            $.message.pop("请不要快速重复提交", "warning");
+            return;
+        }
+        buildExportXhrCache = 1;
+        // var sourcepdfUrl = location.pathname.split('/').slice(0,-1);
+        // sourcepdfUrl.push('preLoanReportHistory.json?operationType=gotoExportUrl')
+        // sourcepdfUrl = sourcepdfUrl.join('/');
+        $.ajax({
+            type: 'post',
+            url: 'preLoanReport.json?operationType=doBatchExport',
+            data: paramData,
+            dataType: 'json',
+            cache: false,
+        }).done(function (result) {
+            result = result ? result : {};
+            result.attr = result.attr ? result.attr : {};
+            if (result.success) {
+                if (result.attr.status == "SUCCESS") {
+                    $("#download-report-wrap").find("iframe").attr("src", 'https://' + result.attr.url);
+                } else if (result.attr.status == "RUNING") {
+                    $.message.pop("正在加载，请稍等", "success");
+                    var count = 0;
+                    $(".report-export-operate .report-export").addClass('download-disabled');//.css("display", "none");
+                    $(".report-export-operate .export-process").show();//.css("display", "block");
+                    var fileProcessXhrCache = 0;
+                    var fileProcess = setInterval(function () {
+                        if (fileProcessXhrCache) {
+                            return false;
+                        }
+                        fileProcessXhrCache = 1;
+                        $.ajax({
+                            type: 'get',
+                            url: 'preLoanReportHistory.json?operationType=checkExportStatus',
+                            dataType: 'json',
+                            cache: false,
+                            async: false
+                        }).done(function (data) {
+                            data = data ? data : {};
+                            data.attr = data.attr ? data.attr : {};
+                            if (data.success) {
+                                if (data.attr.status == "RUNING") {
+                                    count = data.attr.percentages.toFixed(1);
+                                    $(".report-export-operate .export-process .export-processing").css("width", count + "%");
+                                    $(".report-export-operate .export-process .export-processing span").text(count + "%");
+                                } else if (data.attr.status == "SUCCESS") {
+                                    $.message.pop("加载成功，浏览器正在下载", "success");
+                                    $("#download-report-wrap").find("iframe").attr("src", 'https://' + data.attr.url);
+                                    initExportOperate();
+                                    clearInterval(fileProcess);
+                                    buildExportXhrCache = 0;
+                                } else if (data.attr.status == "UNSTART") {
+                                    $.message.pop("服务器发生错误", "warning");
+                                    initExportOperate();
+                                    clearInterval(fileProcess);
+                                    buildExportXhrCache = 0;
+                                } else if (data.attr.status == "FAILED") {
+                                    $.message.pop("请求数据失败", "warning");
+                                    initExportOperate();
+                                    clearInterval(fileProcess);
+                                    buildExportXhrCache = 0;
+                                }
+                            } else {
+                                $.message.pop(data.msg, "warning");
+                            }
+                        }).fail(function () {
+                            $.message.pop("发送请求失败", "warning");
+                        }).always(function () {
+                            fileProcessXhrCache = 0;
+                        });
+                    }, 1000);
+                } else if (result.attr.status == "FAILED") {
+                    $.message.pop("部分报告未找到", "warning");
+                } else if (result.attr.status == "UNSTART") {
+                    $.message.pop("任务尚未启动", "warning");
+                }
+            } else {
+                $.message.pop(result.msg, "warning");
+                initExportOperate();
+                buildExportXhrCache = 0;
+            }
+        }).fail(function (err) {
+            $.message.pop("发送请求失败", "warning");
+            buildExportXhrCache = 0;
+        }).always(function () {
+            // buildExportXhrCache = 0;
+        });
+    }
+
+    //单个导出
+    function doExport(paramData){
+        var flag = false;
+        var message = '';
+        $.ajax({
+            type: 'post',
+            url: 'preLoanReport.json?operationType=doExport',
+            data: paramData,
+            dataType: 'json',
+            async: false,
+            cache: false,
+        }).done(function(data){
+            if(data.code == 0){
+                flag = true;
+                message = data.msg;
+            }
+            if(!flag){
+                var src = "preLoanReport.json?operationType=exportPdfData&gotourl=1&app_name="+paramData['app_name']+"&report_id="+paramData['report_id'];
+                $("#download-report-wrap2").find("iframe").attr("src", src);
+            }else{
+                $.message.pop(message,'warning');
+            }
+        });
+    }
+    // 检查上次导出进度
+    buildExportXhrCache = 1;
+    $.ajax({
+        type: 'get',
+        url: 'preLoanReportHistory.json?operationType=checkExportStatus',
+        dataType: 'json',
+        cache: false,
+        async: false
+    }).done(function (data) {
+        data = data ? data : {};
+        data.attr = data.attr ? data.attr : {};
+        if (data.success) {
+            if (data.attr.status == "RUNING") {
+                progressFun();
+            }else{
+                buildExportXhrCache = 0;
+            }
+        }else{
+            buildExportXhrCache = 0;
+        }
+    }).fail(function(){
+        buildExportXhrCache = 0;
+    })
+    //推送设置
+    //$("#condition-form-alarm").on('click', function () {
+    //
+    //    jQuery.ajax({
+    //        url: baseUrl + 'PreLoanReportHistory.json',
+    //        type: 'get',
+    //        dataType: 'json',
+    //        data: {operationType: "getPushConfig "},
+    //        success: function (data) {
+    //            if (data.success) {
+    //                $("#email").val(data.attr.email);
+    //            }
+    //            else {
+    //                jQuery.message.pop(data.msg,"warning");
+    //            }
+    //        },
+    //        complete: function () {
+    //            $("#post").popOn(100);
+    //        }
+    //    });
+    //
+    //
+    //});
+    $("#post-config").click(function () {
+        var emails = $.trim($("#email").val()).split(';');
+        emails = $.map(emails, function (email) {
+            if (email) {
+                return email;
+            }
+        });
+        if(emails.length==0){
+            $.message.pop('收件人不能为空', 'warning');
+            return false;
+        }
+
+        if (emails.length > 20) {
+            $.message.pop('收件人电子邮箱数量目前最多仅支持20个', 'warning');
+            return false;
+        }
+        var emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
+        for (var i in emails) {
+            if (!emailReg.test(emails[i])) {
+                $.message.pop('请输⼊正确的邮箱，多个邮箱请用英文分号分隔', 'warning');
+                return false;
+            }
+        }
+
+        jQuery.ajax({
+            url: baseUrl + 'PreLoanReportHistory.json',
+            type: 'POST',
+            dataType: 'json',
+            data: {operationType: "pushConfig", email: emails.join(";")},
+            success: function (data) {
+                if (data.success) {
+                    $("#post").popOff();
+                    $.message.pop("设置成功","success");
+                }
+                else {
+                    $("#post").popOff();
+                    jQuery.message.pop(data.msg,"warning");
+                }
+            },
+            complete: function () {
+                $("#post").popOff();
+            }
+        });
+    });
+
+    //overlay输入框聚焦事件
+    $(".add-loan-info").focus(function () {
+        $("#errorMessage").hide();//.css("display", "none");
+    })
+
+    //弹出添加贷后监控overlay取消和提交按钮功能
+    $("#addMonitorCancel").click(function () {
+        hideOverlay(addMonitorLightBox);
+    });
+
+    $('.lm-personal-add-monitor .overlay-close').on('click', function () {
+        hideOverlay('lm-personal-add-monitor');
+    });
+
+    //添加贷后监控按钮点击事件、overlay字段渲染
+    $("#addLoanMonitor").click(function () {
+        //$("#inputSelect")[0].selectize.setValue("MONTH");
+        if (selectedReportCount == 0) {
+            $.message.pop("请选择一条准入记录！", "warning");
+        }
+        if (selectedReportCount == 1) {
+            $(".add-loan-info").val("");
+            $("#errorMessage").hide();//.css("display", "none");
+            $(".add-monitor-positionfix").css("margin-top", "-300.5px");
+            showOverlay(addMonitorLightBox);
+            var selectItemData = $('.report-table tbody').find('input:checked');
+            var today=new Date();
+            var scanBeginDate=new Date(today.getTime()+24*60*60*1000);
+            var scan_begin_date=scanBeginDate.format('yyyy-MM-dd');
+            $('#beginScanTime').val(scan_begin_date);
+            $("#scanPeriod").val($("#scanPeriod").attr('name'));
+            var addMonitorData = {
+                report_id: selectItemData.val(),
+                name: selectItemData.attr('data-name'),
+                id_number: selectItemData.attr('data-pid'),
+                mobile: selectItemData.attr('data-mobile'),
+                loan_date: selectItemData.attr('data-loanDate'),
+                loan_term: selectItemData.attr('data-loanTerm'),
+                loan_amount: selectItemData.attr('data-loanAmount'),
+                loan_term_unit: selectItemData.attr('data-loanTermUnit')
+            };
+            var newData = Mustache.render(initAddLoanTpl, {
+                data: addMonitorData,
+                month: function () {
+                    if (addMonitorData.loan_term_unit === "MONTH") {
+                        return "月";
+                    }
+                    if (addMonitorData.loan_term_unit === "DAY") {
+                        return "天";
+                    }
+                },
+                loan_amount: function () {
+                    if (addMonitorData.loan_amount) {
+                        return addMonitorData.loan_amount + "元";
+                    }
+                }
+            });
+            $('.overlay-main-info').html(newData);
+            $("#addLoanMonitor").data('addMonitorData', '');
+            $("#addLoanMonitor").data('addMonitorData', addMonitorData);
+        }
+        if (selectedReportCount > 1) {
+            $.message.pop('每次只能添加一条记录！', 'warning');
+        }
+    });
+
+    //overlay输入框聚焦事件
+    $(".add-loan-info").focus(function () {
+        $("#errorMessage").hide();//.css("display", "none");
+    })
+
+    //弹出添加贷后监控overlay取消和提交按钮功能
+    $("#addMonitorCancel").click(function () {
+        hideOverlay(addMonitorLightBox);
+    });
+    $("#addMonitorSubmit").click(function () {
+        var addMonitorData = $("#addLoanMonitor").data('addMonitorData') || '';
+        var addLoanDate = $("#addLoanDate").val() || '';
+        var addLoanLimit = $("#addLoanLimit").val() || '';
+        addLoanLimit = $.trim(addLoanLimit);
+        var addLoanMoney = $("#addLoanMoney").val() || '';
+        addLoanMoney = $.trim(addLoanMoney);
+        var inputSelect = $("#inputSelect").val();
+
+        var scanBeginDate = $("#beginScanTime").val();
+        var scanBeginTime=new Date(Date.parse(scanBeginDate.replace(/'-'/g, '/')));
+        var scanEndDate = $("#endScanTime").val();
+        var scanEndTime=new Date(Date.parse(scanEndDate.replace(/'-'/g, '/')));
+        var scanPeriod = $('#scanPeriod').val();
+
+        if (addLoanDate == '') {
+            $.message.pop("提交失败：放款日期不能为空",'warning');
+            return;
+        }
+        if (addLoanMoney == '') {
+            $.message.pop("提交失败：放款金额不能为空",'warning');
+            return;
+        }
+        if (addLoanLimit == '') {
+            $.message.pop("提交失败：放款期限不能为空",'warning');
+            return;
+        }
+        if (scanBeginDate == '') {
+            $.message.pop("提交失败：监控开始时间不能为空",'warning');
+            return;
+        }
+        if (scanEndDate == '') {
+            $.message.pop("提交失败：监控结束时间不能为空",'warning');
+            return;
+        }
+        var todayTime = new Date();
+        if (scanBeginTime.getTime() <=todayTime.getTime()) {
+            $.message.pop("提交失败：监控开始时间必须晚于今天",'warning');
+            return;
+        }
+
+        if (scanEndTime.getTime() <=todayTime.getTime()) {
+            $.message.pop("提交失败：监控结束时间必须晚于今天",'warning');
+            return;
+        }
+
+        if (scanBeginTime.getTime() >scanEndTime.getTime()) {
+            $.message.pop("提交失败：监控结束时间不能早于监控开始时间",'warning');
+            return;
+        }
+
+        if (scanPeriod == '') {
+            $.message.pop("提交失败：扫描周期不能为空",'warning');
+            return;
+        }
+
+        if(scanPeriod > 1000){
+            $.message.pop("提交失败：扫描周期不能超过1000，建议设置为 1 ~ 30天",'warning');
+            return;
+        }
+
+        if (loanEmptyTest(addLoanDate, addLoanLimit, addLoanMoney)) {
+            var data = {
+                reportId: addMonitorData.report_id,
+                loanDate: addLoanDate,
+                loanTerm: addLoanLimit,
+                loanTermUnit: inputSelect,
+                loanAmount: addLoanMoney,
+                scanBeginTime:scanBeginDate,
+                scanEndTime:scanEndDate,
+                scanPeriod:scanPeriod,
+                operationType: 'addMonitor'
+            };
+            $.ajax({
+                type: 'post',
+                url: '/postloanmonitor/riskmonitor/postLoanMonitor.json',
+                data: data,
+                dataType: 'json',
+                cache: false
+            }).done(function (data) {
+                if (data && data.success) {
+                    $.message.pop("添加成功", 'success');
+                    hideOverlay(addMonitorLightBox);
+                } else if (data && data.msg) {
+                    $.message.pop("提交失败：" + data.msg,'warning');
+                }
+            });
+        }
+    });
+
+    //放款信息非空校验函数
+    function loanEmptyTest(addLoanDate, addLoanLimit, addLoanMoney) {
+        if (!addLoanDate || !addLoanLimit || !addLoanMoney) {
+            $.message.pop("提交失败：请将放款信息填写完整！", "warning");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    function GetDoc(x) {
+        return x.contentWindow.document || x.contentDocument || x.document;
+    }
+
+    //监控报告详情
+    $('#iframe-wrap').find('iframe').on('load', function () {
+        var _this = $(this);
+        if (!$('.report-mask', GetDoc(_this.get(0))).length) {
+            $('#iframe-wrap').hide();
+            $.message.pop('该报告不存在', "warning");
+        } else {
+            $('#iframe-wrap').show();
+        }
+    });
+    $('.report_detail').on('click', function () {
+        var reportId = $(this).attr("data-rid");
+        var src = 'preLoanReport.htm?report_id=' + reportId;
+        var url = src;
+        $('#iframe-wrap').find('iframe').attr('src', url);
+    });
+
+    // 添加贷后监控输入控制
+    $('.personal-add-monitor')
+    .on('keyup', '#addLoanLimit', function () {
+        var _this = $(this);
+        var val = _this.val().replace(/[^\d]/g, '');
+        _this.val(val);
+    })
+    .on('keyup', '#addLoanMoney', function () {
+        var _this = $(this);
+        var val = _this.val().replace(/[^\d.]/g, '');
+        _this.val(val);
+    })
+    .on('keyup','#scanPeriod', function () {
+        var _this = $(this);
+        var value = _this.val().replace(/[^\d]/g, '');
+        if(value==0){
+            _this.val("");
+        }else{
+            _this.val(value);
+        }
+    });
+
+    var today=new Date();
+    var scanBeginDate=new Date(today.getTime()+24*60*60*1000);
+    var scan_begin_date=scanBeginDate.format('yyyy-MM-dd');
+    $('#beginScanTime').val(scan_begin_date);
+
+    //根据放款日期和期限确定扫描结束日期
+    $('#addLoanDate').change( function () {
+        var _this = $(this);
+        var loanDate = new Date(Date.parse(_this.val().replace(/'-'/g, '/')));
+        var loanTerm = $("#addLoanLimit").val();
+        if(loanTerm!=''){
+            if($("#inputSelect").val()=='DAY'){
+                var scanEndDate=new Date(loanDate.getTime()+loanTerm*24*60*60*1000);
+            }else{
+                var scanEndDate=new Date(loanDate.getTime()+loanTerm*30*24*60*60*1000);
+            }
+            var scan_end_date=scanEndDate.format('yyyy-MM-dd');
+            $('#endScanTime').val(scan_end_date);
+        }
+    });
+
+    $('#addLoanLimit').on('keyup', function(){
+        changeScanTime();
+    });
+
+    $('#inputSelect').change( function () {
+        changeScanTime();
+    });
+
+    function changeScanTime() {
+        var loanTerm = $("#addLoanLimit").val();
+        var scanEndDate = '';
+        if ($("#addLoanDate").val() != '') {
+            var loanDate = new Date(Date.parse($("#addLoanDate").val().replace(/'-'/g, '/')));
+            if ($('#inputSelect').val() == 'DAY') {
+                scanEndDate = new Date(loanDate.getTime() + loanTerm * 24 * 60 * 60 * 1000);
+            } else {
+                scanEndDate = new Date(loanDate.getTime() + loanTerm * 30 * 24 * 60 * 60 * 1000);
+            }
+
+            var currentTime = new Date();
+            if (currentTime.getTime() > scanEndDate.getTime()) {
+                $('#endScanTime').val("");
+            } else {
+                var scan_end_date = scanEndDate.format('yyyy-MM-dd');
+                $('#endScanTime').val(scan_end_date);
+            }
+
+        }
+    }
+
+    $("#ruleName").selectInit({
+        dataList: [],
+        callback: function(index, item) {
+            //$("#ruleUuid").val(item.value);
+        }
+    });
+
+    // 规则搜索
+    $('#ruleName').on('keyup', 'input', function() {
+        var $this = $(this);
+        var ruleName = $this.val();
+        if (!$.trim(ruleName)) {
+            $("#ruleName").selectInit({
+                dataList: allRules,
+                callback: function(index, item) {
+                }
+            });
+            $this.focus().trigger('click');
+            return false;
+        }
+
+        var searchRuleList=[];
+
+        $.each(allRules, function(i, rule){
+            if(rule.value.indexOf(ruleName)>-1){
+                searchRuleList.push(rule);
+            }
+        });
+        $("#ruleName").selectInit({
+            dataList: searchRuleList,
+            callback: function(index, item) {
+            }
+        });
+        $this.focus().trigger('click');
+
+    });
+
+    function getRuleList(){
+        if (ruleNameReq) {
+            ruleNameReq.abort();
+        }
+        ruleNameReq = $.ajax({
+            type: "post",
+            url: baseUrl + 'PreLoanReportHistory.json',
+            dataType: "json",
+            data: {
+                ruleName: "",
+                operationType: 'getRuleList'
+            },
+            success: function(data) {
+                if (data.success) {
+                    var rules = [];
+                    $.each(data.attr, function(i, n) {
+                        var item = {text: n, value: n};
+                        rules.push(item);
+                    });
+                    allRules = rules;
+                    $("#ruleName").selectInit({
+                        dataList: rules,
+                        callback: function(index, item) {
+                            //$("#ruleUuid").val(item.text.substring(item.text.lastIndexOf('］') + 1));
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+});

@@ -1,0 +1,153 @@
+{
+    "formatters" : [
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION",
+        "type" : "PREFIX",
+        "clazz" : "com.tairan.cloud.credit.prefix.ItemsUnionPrefixBuilder",
+        "parameters" : {
+          "replaces" : {
+            "group" : {
+              "个人基本信息核查" : "group1",
+              "不良信息扫描" : "group2",
+              "多平台借贷申请检测" : "group3",
+              "关联人信息扫描" : "group4",
+              "客户行为检测" : "group5",
+              "多平台借贷负债检测" : "group6"
+            }
+          },
+          "union" : [
+            "group", "item_id"
+          ],
+          "sameFields" : []
+        }
+      },
+      {
+        "formatter_id" : "VALUE_FREQUENCY_DETAIL_LIST",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "(\\w*[\u4e00-\u9fa5]+)：(\\d+)",
+          "count" : 2,
+          "output" : [
+            "Desc",
+            "Cnt"
+          ],
+          "outputSelf" : "fasle"
+        }
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexAndReplaceValueBuilder",
+        "parameters" : {
+          "regex" : "(\\w*[\u4e00-\u9fa5]+):(\\d+)",
+          "count" : 2,
+          "map" : {
+            "银行消费金融公司" : "Cnt_yhxfjr",
+            "大型消费金融公司" : "Cnt_dxxfjr",
+            "一般消费分期平台" : "Cnt_ybxffq",
+            "厂商汽车金融" : "Cnt_csqcjr",
+            "互联网金融门户" : "Cnt_hlwjrmh",
+            "P2P网贷" : "Cnt_p2p",
+            "理财机构" : "Cnt_lcjg",
+            "财产保险" : "Cnt_ccbx",
+            "小额贷款公司" : "Cnt_xedk",
+            "第三方服务商" : "Cnt_dsffw",
+            "信用卡中心" : "Cnt_xykzx"
+          }
+        }
+      },
+      {
+        "formatter_id" : "VALUE_FRAUD_TYPE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.SplitAndCntValueBuilder",
+        "parameters" : {
+          "splitter" : "、",
+          "map" : {
+            "法院结案" : "Cnt_fyja",
+            "法院失信" : "Cnt_fysx",
+            "法院执行" : "Cnt_fyzx",
+            "风险激活" : "Cnt_fxjh",
+            "机构代办" : "Cnt_jgdb",
+            "举报欺诈" : "Cnt_jbqz",
+            "垃圾注册" : "Cnt_ljzc",
+            "伪冒风险" : "Cnt_wmfx",
+            "信贷逾期名单" : "Cnt_xdyqmd",
+            "异常登录" : "Cnt_ycdl",
+            "异常借款" : "Cnt_ycjk",
+            "异常审核" : "Cnt_ycsh",
+            "异常注册" : "Cnt_yczc"
+          }
+        }
+      },
+      {
+        "formatter_id" : "VALUE_HIT_TYPE_DISPLAYNAME",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.AddValueAfterFieldValueBuilder",
+        "parameters" : {
+          "keyPrefix": "_Desc",
+          "map" : {
+            "借款人身份证" : "Cnt_id",
+            "借款人手机" : "Cnt_mobile"
+          }
+        }
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL_NEWRULE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.OutputArrayAsStringValueBuilder",
+        "parameters" : ""
+      }
+    ],
+    
+    "prefixs" : [
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION",
+        "depth" : 5,
+        "pattern" : "td_response_report_risk_items_\\d+"
+      }
+    ],
+    
+    "values" : [
+      {
+        "formatter_id" : "VALUE_FREQUENCY_DETAIL_LIST",
+        "depth" : 9,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_frequency_detail_list_\\d+_detail"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL",
+        "depth" : 8,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail_\\d+"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL",
+        "depth" : 10,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail_dimension+_\\d+_detail_\\d+"
+      },
+      {
+        "formatter_id" : "VALUE_FRAUD_TYPE",
+        "depth" : 7,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_fraud_type"
+      },
+      {
+        "formatter_id" : "VALUE_FRAUD_TYPE",
+        "depth" : 9,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_namelist_hit_details_\\d+_fraud_type"
+      },
+      {
+        "formatter_id" : "VALUE_HIT_TYPE_DISPLAYNAME",
+        "depth" : 9,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_namelist_hit_details+_\\d+_hit_type_displayname"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL_NEWRULE",
+        "depth" : 7,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL_NEWRULE",
+        "depth" : 9,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail_dimension+_\\d+_detail"
+      }
+    ]
+}

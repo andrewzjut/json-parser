@@ -1,0 +1,122 @@
+/**
+ * Created by Session on 16/1/15.
+ */
+/**
+ * Copyright @2014 杭州同盾科技有限公司 版权所有
+ * Author : Rookie & ma
+ * For：系统集成--前端集成
+ * Date : 14-09-16
+ */
+var cmObjs = {};
+$(function () {
+    /*toTop Begin*/
+    function windowScrollTop(){
+        if($(window).scrollTop()>200){
+            $('.toTop').css({'display':'inline-block'});
+        }else if($(window).scrollTop()<195) {
+            $('.toTop').css({'display': 'none'});
+        }
+    }
+    //refresh
+    windowScrollTop();
+    //Scroll
+    $(window).scroll(function(){
+        if($(window).scrollTop()>200){
+            $('.toTop').css({'display':'inline-block'});
+        }else if($(window).scrollTop()<195) {
+            $('.toTop').css({'display': 'none'});
+        }
+    });
+    //click toTop
+    $('.toTop').on('click',function(){
+       /* $(window).scrollTop('0');*/
+        $('body').animate({scrollTop:'0px'},300);
+    });
+
+    //mouseover  mouseout
+    $('.toTop').mouseover(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $('.toTop img').hide();
+        $('.toTop div').show();
+    }).mouseout(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $('.toTop div').hide();
+        $('.toTop img').show();
+    });
+    /*toTop end*/
+
+
+    //语法高亮
+    var codeOption = {
+        jsOption: {
+            lineNumbers: true, // 显示行号
+            readOnly: true,
+            matchBrackets: true,
+            theme: 'mbo',
+            mode: 'application/json'
+        },
+        xmlOption: {
+            lineNumbers: true, // 显示行号
+            readOnly: true,
+            matchBrackets: true,
+            theme: 'mbo',
+            mode: 'application/xml'
+        },
+        javaOption: {
+            lineNumbers: true, // 显示行号
+            readOnly: true,
+            matchBrackets: true,
+            mode: 'text/x-groovy'
+        },
+        htmlOption: {
+            lineNumbers: true, // 显示行号
+            readOnly: true,
+            matchBrackets: true,
+            theme: 'mbo',
+            mode: 'text/html'
+        },
+        ocOption: {
+            lineNumbers: true, // 显示行号
+            readOnly: true,
+            matchBrackets: true,
+            mode: 'text/x-objectivec'
+        }
+    };
+    // 代码应用codemirror
+    $.each($('.code-block'), function (index, apiCode) {
+        var _this = $(apiCode);
+        var apiOption = _this.attr('data-option');
+        var apiMirrorId = _this.attr('id') || '';
+        if (apiMirrorId) {
+            cmObjs[apiMirrorId] = CodeMirror.fromTextArea(apiCode, codeOption[apiOption]);
+        } else {
+            CodeMirror.fromTextArea(apiCode, codeOption[apiOption]);
+        }
+    });
+
+    //fp展示
+    if (document.getElementById("fpCode")) {
+        var fpCodeMirror = CodeMirror.fromTextArea(document.getElementById("fpCode"), jsonOption);
+        CodeMirror.commands["selectAll"](fpCodeMirror);
+        fpCodeMirror.autoFormatRange(fpCodeMirror.getCursor(true), fpCodeMirror.getCursor(false));
+    }
+    $(".code-block-middle").parent().children(".CodeMirror").css("height","300px");
+});
+
+
+// ZeroClipboard  复制到剪贴板插件 start
+function getid(id) {
+    return document.getElementById(id);
+}
+function toClipboard(cid, tid) {
+    var clip = new ZeroClipboard.Client();
+    clip.setHandCursor(true);
+    clip.setText(cmObjs[tid].getValue());
+    clip.addEventListener('complete', function (client) {
+        alert("复制成功!");
+    });
+    clip.glue(cid);
+}
+

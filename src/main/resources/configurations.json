@@ -1,0 +1,1760 @@
+{
+  "rpc" : {
+    "enable" : false,
+    "fileDistributeNum" : 1,
+    "monitorInterval" : 10000,
+    "messageDir" : "filewatcher",
+    "messageRetention.days" : 7,
+    "messageSuffix" : ".message",
+    "waitMessageInterval" : 1000,
+    "serverPort" : 8888,
+    "serverIp" : "172.30.251.229",
+    "reconnectTime" : 3000,
+    "charset" : "utf-8",
+    "batchMessageSize" : 10,
+    "dateFormat" : "yyyy-MM-dd"
+  },
+
+  "td" : {
+    "topic" : "parser_td",
+    "formatters" : [
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION",
+        "type" : "PREFIX",
+        "clazz" : "com.tairan.cloud.credit.prefix.ItemsUnionPrefixBuilder",
+        "parameters" : {
+          "replaces" : {
+            "group" : {
+              "个人基本信息核查" : "group1",
+              "不良信息扫描" : "group2",
+              "多平台借贷申请检测" : "group3",
+              "关联人信息扫描" : "group4",
+              "客户行为检测" : "group5",
+              "多平台借贷负债检测" : "group6"
+            }
+          },
+          "union" : [
+            "group", "item_id"
+          ],
+          "sameFields" : []
+        }
+      },
+      {
+        "formatter_id" : "VALUE_FREQUENCY_DETAIL_LIST",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "(\\w*[\u4e00-\u9fa5]+)>*=*[\\d]*：*([\\d]*)",
+          "count" : 2,
+          "output" : [
+            "Desc",
+            "Cnt"
+          ],
+          "outputSelf" : "fasle"
+        }
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexAndReplaceValueBuilder",
+        "parameters" : {
+          "regex" : "(\\w*[\u4e00-\u9fa5]+):(\\d+)",
+          "count" : 2,
+          "map" : {
+            "网上银行" : "Cnt_wsyh",
+            "信用卡中心" : "Cnt_xykzx",
+            "银行消费金融公司" : "Cnt_yhxfjr",
+            "银行对公业务" : "Cnt_yhdgyw",
+            "银行个人业务" : "Cnt_yhgryw",
+            "银行小微贷款" : "Cnt_yhxwdk",
+            "直销银行" : "Cnt_zxyh",
+            "财产保险" : "Cnt_ccbx",
+            "人身保险" : "Cnt_rxbx",
+            "大型消费金融公司" : "Cnt_dxxfjr",
+            "小额贷款公司" : "Cnt_xedk",
+            "P2P网贷" : "Cnt_p2p",
+            "厂商汽车金融" : "Cnt_csqcjr",
+            "一般消费分期平台" : "Cnt_ybxffq",
+            "房地产金融" : "Cnt_fdcjr",
+            "大数据金融" : "Cnt_dxjjr",
+            "融资租赁" : "Cnt_rzdb",
+            "担保" : "Cnt_db",
+            "资产转让" : "Cnt_zczr",
+            "虚拟货币平台" : "Cnt_xnhb",
+            "交通工具租赁" : "Cnt_jtgjzl",
+            "设备租赁" : "Cnt_sbzl",
+            "房屋租赁" : "Cnt_fwzl",
+            "汽车租赁" : "Cnt_qczl",
+            "互联网金融门户" : "Cnt_hlwjrmh",
+            "第三方服务商" : "Cnt_dsffws",
+            "众筹平台" : "Cnt_zcpt",
+            "理财机构" : "Cnt_lcjg",
+            "第三方支付" : "Cnt_dsfzf",
+            "O2O" : "Cnt_o2o",
+            "综合类电商平台" : "Cnt_zhlds",
+            "比价类电商平台" : "Cnt_bjlds",
+            "跨境电商平台" : "Cnt_kjds",
+            "垂直类电商平台" : "Cnt_czds",
+            "团购平台" : "Cnt_tgpt",
+            "游戏" : "Cnt_yx",
+            "娱乐" : "Cnt_yl",
+            "婚恋交友" : "Cnt_hljy",
+            "信息中介" : "Cnt_xxzj",
+            "航空公司" : "Cnt_hkjs",
+            "物流" : "Cnt_wl",
+            "广告" : "Cnt_gg",
+            "社交网站" : "Cnt_sj"
+          }
+        }
+      },
+      {
+        "formatter_id" : "VALUE_FRAUD_TYPE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.SplitAndCntValueBuilder",
+        "parameters" : {
+          "splitter" : "、",
+          "map" : {
+            "失信名单" : "Cnt_sxmd",
+            "法院失信" : "Cnt_fysx",
+            "流量作弊" : "Cnt_llzb",
+            "异常租赁" : "Cnt_yczl",
+            "伪冒风险" : "Cnt_wmfx",
+            "虚假交易" : "Cnt_xjjy",
+            "非准入客户" : "Cnt_fzlkh",
+            "法院结案" : "Cnt_fyja",
+            "法院失信犯罪类" : "Cnt_fysxfz",
+            "风险评论" : "Cnt_fxpl",
+            "风险认证" : "Cnt_fxrz",
+            "恶意爬取" : "Cnt_eypq",
+            "异常打开" : "Cnt_ycdk",
+            "钓鱼短信" : "Cnt_dydx",
+            "恶意灌水" : "Cnt_eygs",
+            "异常问诊" : "Cnt_ycwz",
+            "审核失信风险" : "Cnt_shsxfx",
+            "恶意骗补" : "Cnt_eypb",
+            "异常爬取" : "Cnt_ycpq",
+            "征信搜索" : "Cnt_zxss",
+            "垃圾注册" : "Cnt_yczc",
+            "异常充值" : "Cnt_yccz",
+            "法院失信骗贷类" : "Cnt_fysxpd",
+            "消费信用风险" : "Cnt_xfxyfx",
+            "欠税公司法人" : "Cnt_qsgxfr",
+            "机器行为" : "Cnt_jqxw",
+            "机构代办" : "Cnt_jgdb",
+            "信用异常" : "Cnt_xyyc",
+            "异常发布" : "Cnt_ycfb",
+            "撞库风险" : "Cnt_zkfx",
+            "异常借款" : "Cnt_ycjk",
+            "用户作弊" : "Cnt_yhzb",
+            "异常担保" : "Cnt_ycdb",
+            "违规经营" : "Cnt_wgjj",
+            "风险预约" : "Cnt_fxyy",
+            "刷单" : "Cnt_sd",
+            "风险修改" : "Cnt_fxxg",
+            "黄牛预约" : "Cnt_hnyy",
+            "套现" : "Cnt_tx",
+            "垃圾消息" : "Cnt_ljxx",
+            "商户炒作" : "Cnt_shcz",
+            "异常转账" : "Cnt_yczz",
+            "出行失信" : "Cnt_cxsx",
+            "异常交易" : "Cnt_ycjy",
+            "异常注册" : "Cnt_yczc",
+            "异常支付" : "Cnt_yczf",
+            "风险解锁" : "Cnt_fxjs",
+            "异常登录" : "Cnt_ycdl",
+            "账户盗用" : "Cnt_ycdy",
+            "暴力破解" : "Cnt_blpj",
+            "洗钱" : "Cnt_xq",
+            "风险支付" : "Cnt_fxzf",
+            "异常预约" : "Cnt_ycyy",
+            "电商黑名单" : "Cnt_dshmd",
+            "异常退出" : "Cnt_yctc",
+            "盗用账户" : "Cnt_dyzh",
+            "风险交易" : "Cnt_fxjy",
+            "运营风险" : "Cnt_yyfx",
+            "垃圾评论" : "Cnt_ljpl",
+            "违禁过滤" : "Cnt_wjgl",
+            "非准雇资信" : "Cnt_xzgzx",
+            "风险问诊" : "Cnt_fxwz",
+            "信用炒作" : "Cnt_xycz",
+            "异常退款" : "Cnt_yctk",
+            "异常弹幕" : "Cnt_ycdm",
+            "攻击型IP" : "Cnt_jzxIp",
+            "助学贷款逾期" : "Cnt_zxdkyq",
+            "风险调额" : "Cnt_fxte",
+            "骗取补贴" : "Cnt_pqbt",
+            "电信欺诈" : "Cnt_dxqz",
+            "直播内容异常" : "Cnt_zbnryc",
+            "异常兑换" : "Cnt_ycdh",
+            "恶意刷单" : "Cnt_eysd",
+            "虚假号码" : "Cnt_xxhm",
+            "举报欺诈" : "Cnt_jzqz",
+            "风险激活" : "Cnt_fxjh",
+            "法院执行" : "Cnt_fyzx",
+            "法院失信欠款类" : "Cnt_fysxqk",
+            "失信后还款" : "Cnt_sxhhk",
+            "欠税" : "Cnt_qx",
+            "商户欺诈" : "Cnt_shqz",
+            "异常接单" : "Cnt_ycjd",
+            "钓鱼检测" : "Cnt_dyjc",
+            "刑事犯罪" : "Cnt_xsfz",
+            "欺诈申请" : "Cnt_qzsq",
+            "盗卡欺诈" : "Cnt_dkqz",
+            "短信轰炸" : "Cnt_dxhz",
+            "异常叫车" : "Cnt_ycjc",
+            "汽车租赁欺诈" : "Cnt_qczlqz",
+            "异常提现" : "Cnt_yctx",
+            "异常审核" : "Cnt_ycsh",
+            "异常行为" : "Cnt_ycxw",
+            "恶意频繁注册" : "Cnt_eypfzc",
+            "失信风险" : "Cnt_sxfx",
+            "申请行为异常" : "Cnt_sqxwyc",
+            "信用风险商户" : "Cnt_xyfxsh",
+            "失信公司法人" : "Cnt_sxgsfr",
+            "游戏消费失信" : "Cnt_yxxxsx",
+            "作弊行为" : "Cnt_zbxw",
+            "盗车风险" : "Cnt_dcfx",
+            "通信小号" : "Cnt_txxh",
+            "贷款黑中介" : "Cnt_dkzhj",
+            "异常申购" : "Cnt_ycsg",
+            "失联" : "Cnt_sl",
+            "法院裁判文书" : "Cnt_facaws",
+            "公司违规经营" : "Cnt_gswgjj",
+            "投资信用风险" : "Cnt_tzxxfx",
+            "风险图片" : "Cnt_fxtp",
+            "车贷黑名单" : "Cnt_cdhmd",
+            "信贷逾期名单" : "Cnt_xdyqmd",
+            "风险收码" : "Cnt_fxsm",
+            "支付作弊" : "Cnt_zfzb",
+            "风险反馈" : "Cnt_fxfk",
+            "异常确认" : "Cnt_ycqr",
+            "欠税公司法人代表" : "Cnt_qxgsfrdb",
+            "异常绑卡" : "Cnt_ycbk",
+            "故意违章乘车" : "Cnt_gywzcc",
+            "异常修改" : "Cnt_ycxg",
+            "电商风险名单" : "Cnt_dsfxmd",
+            "恶意炒信" : "Cnt_eycx",
+            "助学贷款欠费" : "Cnt_zxdkqf",
+            "风险确认" : "Cnt_fxqr",
+            "信贷逾期后还款" : "Cnt_xdyqhhk",
+            "异常申请" : "Cnt_ycsq",
+            "盗卡风险" : "Cnt_dkfx",
+            "汽车租赁违约" : "Cnt_qczlwy",
+            "欠款公司法人代表" : "Cnt_qkgsfrdb",
+            "游戏消费欠费" : "Cnt_yxxxqf",
+            "车贷风险名单" : "Cnt_cdfxmd"
+          }
+        }
+      },
+      {
+        "formatter_id" : "VALUE_HIT_TYPE_DISPLAYNAME",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.AddValueAfterFieldValueBuilder",
+        "parameters" : {
+          "keyPrefix": "_Desc",
+          "map" : {
+            "借款人身份证" : "Cnt_id",
+            "借款人手机" : "Cnt_mobile"
+          }
+        }
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL_NEWRULE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.OutputArrayAsStringValueBuilder",
+        "parameters" : ""
+      }
+    ],
+    
+    "prefixs" : [
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION",
+        "depth" : 5,
+        "pattern" : "td_response_report_risk_items_\\d+"
+      }
+    ],
+    
+    "values" : [
+      {
+        "formatter_id" : "VALUE_FREQUENCY_DETAIL_LIST",
+        "depth" : 9,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_frequency_detail_list_\\d+_detail"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL",
+        "depth" : 8,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail_\\d+"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL",
+        "depth" : 10,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail_dimension+_\\d+_detail_\\d+"
+      },
+      {
+        "formatter_id" : "VALUE_FRAUD_TYPE",
+        "depth" : 7,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_fraud_type"
+      },
+      {
+        "formatter_id" : "VALUE_FRAUD_TYPE",
+        "depth" : 9,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_namelist_hit_details_\\d+_fraud_type"
+      },
+      {
+        "formatter_id" : "VALUE_HIT_TYPE_DISPLAYNAME",
+        "depth" : 9,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_namelist_hit_details+_\\d+_hit_type_displayname"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL_NEWRULE",
+        "depth" : 7,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL_NEWRULE",
+        "depth" : 9,
+        "pattern" : "td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail_dimension+_\\d+_detail"
+      }
+    ]
+  },
+  "jingshu_td" : {
+    "topic" : "parser_jingshu_td",
+    "formatters" : [
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION",
+        "type" : "PREFIX",
+        "clazz" : "com.tairan.cloud.credit.prefix.ItemsUnionPrefixBuilder",
+        "parameters" : {
+          "replaces" : {
+            "group" : {
+              "个人基本信息核查" : "group1",
+              "不良信息扫描" : "group2",
+              "多平台借贷申请检测" : "group3",
+              "关联人信息扫描" : "group4",
+              "客户行为检测" : "group5",
+              "多平台借贷负债检测" : "group6"
+            }
+          },
+          "union" : [
+            "group", "item_id"
+          ],
+          "sameFields" : []
+        }
+      },
+      {
+        "formatter_id" : "VALUE_FREQUENCY_DETAIL_LIST",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "(\\w*[\u4e00-\u9fa5]+)：(\\d+)",
+          "count" : 2,
+          "output" : [
+            "Desc",
+            "Cnt"
+          ],
+          "outputSelf" : "fasle"
+        }
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexAndReplaceValueBuilder",
+        "parameters" : {
+          "regex" : "(\\w*[\u4e00-\u9fa5]+):(\\d+)",
+          "count" : 2,
+          "map" : {
+            "网上银行" : "Cnt_wsyh",
+            "信用卡中心" : "Cnt_xykzx",
+            "银行消费金融公司" : "Cnt_yhxfjr",
+            "银行对公业务" : "Cnt_yhdgyw",
+            "银行个人业务" : "Cnt_yhgryw",
+            "银行小微贷款" : "Cnt_yhxwdk",
+            "直销银行" : "Cnt_zxyh",
+            "财产保险" : "Cnt_ccbx",
+            "人身保险" : "Cnt_rxbx",
+            "大型消费金融公司" : "Cnt_dxxfjr",
+            "小额贷款公司" : "Cnt_xedk",
+            "P2P网贷" : "Cnt_p2p",
+            "厂商汽车金融" : "Cnt_csqcjr",
+            "一般消费分期平台" : "Cnt_ybxffq",
+            "房地产金融" : "Cnt_fdcjr",
+            "大数据金融" : "Cnt_dxjjr",
+            "融资租赁" : "Cnt_rzdb",
+            "担保" : "Cnt_db",
+            "资产转让" : "Cnt_zczr",
+            "虚拟货币平台" : "Cnt_xnhb",
+            "交通工具租赁" : "Cnt_jtgjzl",
+            "设备租赁" : "Cnt_sbzl",
+            "房屋租赁" : "Cnt_fwzl",
+            "汽车租赁" : "Cnt_qczl",
+            "互联网金融门户" : "Cnt_hlwjrmh",
+            "第三方服务商" : "Cnt_dsffws",
+            "众筹平台" : "Cnt_zcpt",
+            "理财机构" : "Cnt_lcjg",
+            "第三方支付" : "Cnt_dsfzf",
+            "O2O" : "Cnt_o2o",
+            "综合类电商平台" : "Cnt_zhlds",
+            "比价类电商平台" : "Cnt_bjlds",
+            "跨境电商平台" : "Cnt_kjds",
+            "垂直类电商平台" : "Cnt_czds",
+            "团购平台" : "Cnt_tgpt",
+            "游戏" : "Cnt_yx",
+            "娱乐" : "Cnt_yl",
+            "婚恋交友" : "Cnt_hljy",
+            "信息中介" : "Cnt_xxzj",
+            "航空公司" : "Cnt_hkjs",
+            "物流" : "Cnt_wl",
+            "广告" : "Cnt_gg",
+            "社交网站" : "Cnt_sj"
+          }
+        }
+      },
+      {
+        "formatter_id" : "VALUE_FRAUD_TYPE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.SplitAndCntValueBuilder",
+        "parameters" : {
+          "splitter" : "、",
+          "map" : {
+            "失信名单" : "Cnt_sxmd",
+            "法院失信" : "Cnt_fysx",
+            "流量作弊" : "Cnt_llzb",
+            "异常租赁" : "Cnt_yczl",
+            "伪冒风险" : "Cnt_wmfx",
+            "虚假交易" : "Cnt_xjjy",
+            "非准入客户" : "Cnt_fzlkh",
+            "法院结案" : "Cnt_fyja",
+            "法院失信犯罪类" : "Cnt_fysxfz",
+            "风险评论" : "Cnt_fxpl",
+            "风险认证" : "Cnt_fxrz",
+            "恶意爬取" : "Cnt_eypq",
+            "异常打开" : "Cnt_ycdk",
+            "钓鱼短信" : "Cnt_dydx",
+            "恶意灌水" : "Cnt_eygs",
+            "异常问诊" : "Cnt_ycwz",
+            "审核失信风险" : "Cnt_shsxfx",
+            "恶意骗补" : "Cnt_eypb",
+            "异常爬取" : "Cnt_ycpq",
+            "征信搜索" : "Cnt_zxss",
+            "垃圾注册" : "Cnt_yczc",
+            "异常充值" : "Cnt_yccz",
+            "法院失信骗贷类" : "Cnt_fysxpd",
+            "消费信用风险" : "Cnt_xfxyfx",
+            "欠税公司法人" : "Cnt_qsgxfr",
+            "机器行为" : "Cnt_jqxw",
+            "机构代办" : "Cnt_jgdb",
+            "信用异常" : "Cnt_xyyc",
+            "异常发布" : "Cnt_ycfb",
+            "撞库风险" : "Cnt_zkfx",
+            "异常借款" : "Cnt_ycjk",
+            "用户作弊" : "Cnt_yhzb",
+            "异常担保" : "Cnt_ycdb",
+            "违规经营" : "Cnt_wgjj",
+            "风险预约" : "Cnt_fxyy",
+            "刷单" : "Cnt_sd",
+            "风险修改" : "Cnt_fxxg",
+            "黄牛预约" : "Cnt_hnyy",
+            "套现" : "Cnt_tx",
+            "垃圾消息" : "Cnt_ljxx",
+            "商户炒作" : "Cnt_shcz",
+            "异常转账" : "Cnt_yczz",
+            "出行失信" : "Cnt_cxsx",
+            "异常交易" : "Cnt_ycjy",
+            "异常注册" : "Cnt_yczc",
+            "异常支付" : "Cnt_yczf",
+            "风险解锁" : "Cnt_fxjs",
+            "异常登录" : "Cnt_ycdl",
+            "账户盗用" : "Cnt_ycdy",
+            "暴力破解" : "Cnt_blpj",
+            "洗钱" : "Cnt_xq",
+            "风险支付" : "Cnt_fxzf",
+            "异常预约" : "Cnt_ycyy",
+            "电商黑名单" : "Cnt_dshmd",
+            "异常退出" : "Cnt_yctc",
+            "盗用账户" : "Cnt_dyzh",
+            "风险交易" : "Cnt_fxjy",
+            "运营风险" : "Cnt_yyfx",
+            "垃圾评论" : "Cnt_ljpl",
+            "违禁过滤" : "Cnt_wjgl",
+            "非准雇资信" : "Cnt_xzgzx",
+            "风险问诊" : "Cnt_fxwz",
+            "信用炒作" : "Cnt_xycz",
+            "异常退款" : "Cnt_yctk",
+            "异常弹幕" : "Cnt_ycdm",
+            "攻击型IP" : "Cnt_jzxIp",
+            "助学贷款逾期" : "Cnt_zxdkyq",
+            "风险调额" : "Cnt_fxte",
+            "骗取补贴" : "Cnt_pqbt",
+            "电信欺诈" : "Cnt_dxqz",
+            "直播内容异常" : "Cnt_zbnryc",
+            "异常兑换" : "Cnt_ycdh",
+            "恶意刷单" : "Cnt_eysd",
+            "虚假号码" : "Cnt_xxhm",
+            "举报欺诈" : "Cnt_jzqz",
+            "风险激活" : "Cnt_fxjh",
+            "法院执行" : "Cnt_fyzx",
+            "法院失信欠款类" : "Cnt_fysxqk",
+            "失信后还款" : "Cnt_sxhhk",
+            "欠税" : "Cnt_qx",
+            "商户欺诈" : "Cnt_shqz",
+            "异常接单" : "Cnt_ycjd",
+            "钓鱼检测" : "Cnt_dyjc",
+            "刑事犯罪" : "Cnt_xsfz",
+            "欺诈申请" : "Cnt_qzsq",
+            "盗卡欺诈" : "Cnt_dkqz",
+            "短信轰炸" : "Cnt_dxhz",
+            "异常叫车" : "Cnt_ycjc",
+            "汽车租赁欺诈" : "Cnt_qczlqz",
+            "异常提现" : "Cnt_yctx",
+            "异常审核" : "Cnt_ycsh",
+            "异常行为" : "Cnt_ycxw",
+            "恶意频繁注册" : "Cnt_eypfzc",
+            "失信风险" : "Cnt_sxfx",
+            "申请行为异常" : "Cnt_sqxwyc",
+            "信用风险商户" : "Cnt_xyfxsh",
+            "失信公司法人" : "Cnt_sxgsfr",
+            "游戏消费失信" : "Cnt_yxxxsx",
+            "作弊行为" : "Cnt_zbxw",
+            "盗车风险" : "Cnt_dcfx",
+            "通信小号" : "Cnt_txxh",
+            "贷款黑中介" : "Cnt_dkzhj",
+            "异常申购" : "Cnt_ycsg",
+            "失联" : "Cnt_sl",
+            "法院裁判文书" : "Cnt_facaws",
+            "公司违规经营" : "Cnt_gswgjj",
+            "投资信用风险" : "Cnt_tzxxfx",
+            "风险图片" : "Cnt_fxtp",
+            "车贷黑名单" : "Cnt_cdhmd",
+            "信贷逾期名单" : "Cnt_xdyqmd",
+            "风险收码" : "Cnt_fxsm",
+            "支付作弊" : "Cnt_zfzb",
+            "风险反馈" : "Cnt_fxfk",
+            "异常确认" : "Cnt_ycqr",
+            "欠税公司法人代表" : "Cnt_qxgsfrdb",
+            "异常绑卡" : "Cnt_ycbk",
+            "故意违章乘车" : "Cnt_gywzcc",
+            "异常修改" : "Cnt_ycxg",
+            "电商风险名单" : "Cnt_dsfxmd",
+            "恶意炒信" : "Cnt_eycx",
+            "助学贷款欠费" : "Cnt_zxdkqf",
+            "风险确认" : "Cnt_fxqr",
+            "信贷逾期后还款" : "Cnt_xdyqhhk",
+            "异常申请" : "Cnt_ycsq",
+            "盗卡风险" : "Cnt_dkfx",
+            "汽车租赁违约" : "Cnt_qczlwy",
+            "欠款公司法人代表" : "Cnt_qkgsfrdb",
+            "游戏消费欠费" : "Cnt_yxxxqf",
+            "车贷风险名单" : "Cnt_cdfxmd"
+          }
+        }
+      },
+      {
+        "formatter_id" : "VALUE_HIT_TYPE_DISPLAYNAME",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.AddValueAfterFieldValueBuilder",
+        "parameters" : {
+          "keyPrefix": "_Desc",
+          "map" : {
+            "借款人身份证" : "Cnt_id",
+            "借款人手机" : "Cnt_mobile"
+          }
+        }
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL_NEWRULE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.OutputArrayAsStringValueBuilder",
+        "parameters" : ""
+      }
+    ],
+    
+    "prefixs" : [
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION",
+        "depth" : 5,
+        "pattern" : "jingshu_td_response_report_risk_items_\\d+"
+      }
+    ],
+    
+    "values" : [
+      {
+        "formatter_id" : "VALUE_FREQUENCY_DETAIL_LIST",
+        "depth" : 9,
+        "pattern" : "jingshu_td_response_report_risk_items_group\\d+_\\d+_item_detail_frequency_detail_list_\\d+_detail"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL",
+        "depth" : 8,
+        "pattern" : "jingshu_td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail_\\d+"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL",
+        "depth" : 10,
+        "pattern" : "jingshu_td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail_dimension+_\\d+_detail_\\d+"
+      },
+      {
+        "formatter_id" : "VALUE_FRAUD_TYPE",
+        "depth" : 7,
+        "pattern" : "jingshu_td_response_report_risk_items_group\\d+_\\d+_item_detail_fraud_type"
+      },
+      {
+        "formatter_id" : "VALUE_FRAUD_TYPE",
+        "depth" : 9,
+        "pattern" : "jingshu_td_response_report_risk_items_group\\d+_\\d+_item_detail_namelist_hit_details_\\d+_fraud_type"
+      },
+      {
+        "formatter_id" : "VALUE_HIT_TYPE_DISPLAYNAME",
+        "depth" : 9,
+        "pattern" : "jingshu_td_response_report_risk_items_group\\d+_\\d+_item_detail_namelist_hit_details+_\\d+_hit_type_displayname"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL_NEWRULE",
+        "depth" : 7,
+        "pattern" : "jingshu_td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail"
+      },
+      {
+        "formatter_id" : "VALUE_PLATFORM_DETAIL_NEWRULE",
+        "depth" : 9,
+        "pattern" : "jingshu_td_response_report_risk_items_group\\d+_\\d+_item_detail_platform_detail_dimension+_\\d+_detail"
+      }
+    ]
+  },
+
+  "nfcs" : {
+    "topic" : "parser_nfcs",
+    "formatters" : [
+      {
+        "formatter_id" : "VALUE_24MTHS_PAYMENT_DESCRIPTION",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.SplitAndAddValueBuilder",
+        "parameters" : ""
+      }
+    ],
+    
+    "values" : [
+      {
+        "formatter_id" : "VALUE_24MTHS_PAYMENT_DESCRIPTION",
+        "depth" : 5,
+        "pattern" : "nfcs_data_loanDetail+_\\d+_24mthsPaymentDescription"
+      }
+    ]
+  },
+
+  "jingshu_nfcs" : {
+    "topic" : "parser_jingshu_nfcs",
+    "formatters" : [
+      {
+        "formatter_id" : "VALUE_24MTHS_PAYMENT_DESCRIPTION",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.SplitAndAddValueBuilder",
+        "parameters" : ""
+      }
+    ],
+    
+    "values" : [
+      {
+        "formatter_id" : "VALUE_24MTHS_PAYMENT_DESCRIPTION",
+        "depth" : 5,
+        "pattern" : "jingshu_nfcs_data_loanDetail+_\\d+_24mthsPaymentDescription"
+      }
+    ]
+  },
+  
+  "jxl" : {
+    "topic" : "parser_jxl",
+    "formatters" : [
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION_APP_POINT",
+        "type" : "PREFIX",
+        "clazz" : "com.tairan.cloud.credit.prefix.ItemsUnionPrefixBuilder",
+        "parameters" : {
+          "replaces" : {},
+          "union" : [
+            "app_point"
+          ],
+          "sameFields" : [
+            "contact"
+          ],
+          "ifNullNotEmitError" : "true"
+        }
+      },
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION_CHECK_POINT",
+        "type" : "PREFIX",
+        "clazz" : "com.tairan.cloud.credit.prefix.ItemsUnionPrefixBuilder",
+        "parameters" : {
+          "replaces" : {},
+          "union" : [
+            "check_point"
+          ],
+          "sameFields" : []
+        }
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.OutputArrayAsStringValueBuilder",
+        "parameters" : ""
+      },
+      {
+        "formatter_id" : "VALUE_APPLICATION_CHECK_MOBILE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]*[,|，]*\\[(.*)\\].*\\[(.*)\\].*\\[(.*)\\].*\\[(.*)\\].*",
+          "invalidDataEvidence" : [
+            ".*无数据.*",
+            ".*无法判断.*",
+            ".*未提供.*",
+            ".*没有.*"
+          ],
+          "count" : 4,
+          "output" : [
+            "daysSum",
+            "contactedCnt",
+            "contactedTime",
+            "mobileRank"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_REQULAR_CIRCLE_RESULT",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*.*活跃在(.+)地区[\\(|（](.+)[\\)|）]",
+          "invalidDataEvidence" : [
+            ".*无数据.*",
+            ".*无法判断.*",
+            ".*未提供.*",
+            ".*没有.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "addr",
+            "addrType"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_REQULAR_CIRCLE_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)%",
+          "invalidDataEvidence" : [
+            ".*无数据.*",
+            ".*无法判断.*",
+            ".*未提供.*",
+            ".*没有.*"
+          ],
+          "count" : 1,
+          "output" : [
+            "mobileTimePerc"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_USED_TIME_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+\\[(.*)\\][\u4e00-\u9fa5]+[,|，][\u4e00-\u9fa5]+([\\d]+)[\u4e00-\u9fa5]+",
+          "invalidDataEvidence" : [
+            ".*未提供.*",
+            ".*无数据.*",
+            ".*无法判断.*",
+            ".*没有.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "mobileNum",
+            "mobileUseTime"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_SLIENT_RESULT",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplit2ValueBuilder",
+        "parameters" : {
+          "regex1" : "([\\d]+)[\u4e00-\u9fa5]+([\\d]+)[\u4e00-\u9fa5]+",
+          "regex2" : ".*关机[\u4e00-\u9fa5]+未超过[\\d]*\\.*[\\d]*天.*",
+          "invalidDataEvidence" : [
+            ".*无数据.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "daysStatis",
+            "daysSum"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_EACH_OTHER_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+([\\d]+)[\u4e00-\u9fa5]+[，|,][\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)%",
+          "invalidDataEvidence" : [
+            ".*未提供.*",
+            ".*无数据.*",
+            ".*无法判断.*",
+            ".*没有.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "contactsCnt",
+            "contactsPer"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_CHARACTER_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+[，|,][\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+",
+          "invalidDataEvidence" : [
+            ".*未发现.*",
+            ".*未提供.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "contactedCnt",
+            "contactedTime"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_NUMBER_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+[\\d]+[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+[，|,][\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+",
+          "invalidDataEvidence" : [
+            ".*未发现.*",
+            ".*未提供.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "contactedCnt",
+            "contactedTime"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_NIGHT_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)%",
+          "invalidDataEvidence" : [
+            ".*未发现.*",
+            ".*未提供.*",
+            ".*未找到.*"
+          ],
+          "count" : 1,
+          "output" : [
+            "activityPer"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_LOANORG_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexLoopBuilder",
+        "parameters" : {
+          "spliter" : ";",
+          "regex1" : "[\u4e00-\u9fa5]*[:|：]*(\\[.*?\\])(主叫.*)",
+          "regex2" : "[\u4e00-\u9fa5]+([\\d]+)[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+[，|,]*[\u4e00-\u9fa5]+([\\d]+)[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+",
+          "invalidDataEvidence" : [
+            ".*未提供.*",
+            ".*未找到.*"
+          ],
+          "count" : 5,
+          "output" : [
+            "loanOrg",
+            "loanOrgCallCnt",
+            "loanOrgCallTime",
+            "loanOrgCalledCnt",
+            "loanOrgCalledTime"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_SILENT_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitRegexValueBuilder",
+        "parameters" : {
+          "regex1" : "\\w*[\u4e00-\u9fa5]+[,|，][\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]*(.*)",
+          "spliter" : "/",
+          "regex2" : "([\\s\\d]+-[\\s\\d]+-[\\s\\d\\w:]+)-([\\s\\d]+-[\\s\\d]+-[\\s\\d\\w:]+)[,|，]*[\\s]*([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+.*",
+          "invalidDataEvidence" : [
+            ".*未提供.*",
+            ".*未检测.*",
+            ".*未找到.*"
+          ],
+          "count1" : 2,
+          "output1" : [
+            "freq"
+          ],
+          "count2" : 3,
+          "output2" : [
+            "dateBegin",
+            "dateEnd",
+            "dateSum"
+          ],
+          "prefix2to1" : "freq",
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      }
+    ],
+    
+    "prefixs" : [
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION_APP_POINT",
+        "depth" : 4,
+        "pattern" : "jxl_JSON_INFO_application_check_\\d+"
+      },
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION_CHECK_POINT",
+        "depth" : 4,
+        "pattern" : "jxl_JSON_INFO_behavior_check_\\d+"
+      }
+    ],
+    
+    "values" : [
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_user_info_check_check_search_info_phone_with_other_idcards"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_user_info_check_check_search_info_phone_with_other_names"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_user_info_check_check_search_info_idcard_with_other_phones"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_user_info_check_check_search_info_idcard_with_other_names"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_user_info_check_check_search_info_searched_org_type"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_user_info_check_check_search_info_register_org_type"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_user_info_check_check_search_info_arised_open_web"
+      },
+      {
+        "formatter_id" : "VALUE_APPLICATION_CHECK_MOBILE",
+        "depth" : 6,
+        "pattern" : "jxl_JSON_INFO_application_check_contact\\d+_check_points_check_mobile"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_REQULAR_CIRCLE_RESULT",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_regular_circle_result"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_REQULAR_CIRCLE_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_regular_circle_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_USED_TIME_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_phone_used_time_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_SLIENT_RESULT",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_phone_silent_result"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_EACH_OTHER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_contact_each_other_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_CHARACTER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_conatct_macao_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_NUMBER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_contact_110_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_NUMBER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_contact_120_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_CHARACTER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_contact_lawyer_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_CHARACTER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_contact_court_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_NIGHT_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_contact_night_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_LOANORG_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_contact_loan_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_LOANORG_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_contact_bank_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_LOANORG_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_contact_credit_card_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_SILENT_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jxl_JSON_INFO_behavior_check_phone_silent_evidence"
+      }
+      
+    ]
+  },
+  
+  "jingshu_yys" : {
+    "topic" : "parser_jingshu_yys",
+    "formatters" : [
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION_APP_POINT",
+        "type" : "PREFIX",
+        "clazz" : "com.tairan.cloud.credit.prefix.ItemsUnionPrefixBuilder",
+        "parameters" : {
+          "replaces" : {},
+          "union" : [
+            "appPoint"
+          ],
+          "sameFields" : [
+            "contact"
+          ],
+          "ifNullNotEmitError" : "true"
+        }
+      },
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION_CHECK_POINT",
+        "type" : "PREFIX",
+        "clazz" : "com.tairan.cloud.credit.prefix.ItemsUnionPrefixBuilder",
+        "parameters" : {
+          "replaces" : {},
+          "union" : [
+            "checkPoint"
+          ],
+          "sameFields" : []
+        }
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.OutputArrayAsStringValueBuilder",
+        "parameters" : ""
+      },
+      {
+        "formatter_id" : "VALUE_APPLICATION_CHECK_MOBILE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]*[,|，]*\\[(.*)\\].*\\[(.*)\\].*\\[(.*)\\].*\\[(.*)\\].*",
+          "invalidDataEvidence" : [
+            ".*无数据.*",
+            ".*无法判断.*",
+            ".*未提供.*",
+            ".*没有.*"
+          ],
+          "count" : 4,
+          "output" : [
+            "daysSum",
+            "contactedCnt",
+            "contactedTime",
+            "mobileRank"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_REQULAR_CIRCLE_RESULT",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*.*活跃在(.+)地区[\\(|（](.+)[\\)|）]",
+          "invalidDataEvidence" : [
+            ".*无数据.*",
+            ".*无法判断.*",
+            ".*未提供.*",
+            ".*没有.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "addr",
+            "addrType"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_REQULAR_CIRCLE_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)%",
+          "invalidDataEvidence" : [
+            ".*无数据.*",
+            ".*无法判断.*",
+            ".*未提供.*",
+            ".*没有.*"
+          ],
+          "count" : 1,
+          "output" : [
+            "mobileTimePerc"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_USED_TIME_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+\\[(.*)\\][\u4e00-\u9fa5]+[,|，][\u4e00-\u9fa5]+([\\d]+)[\u4e00-\u9fa5]+",
+          "invalidDataEvidence" : [
+            ".*未提供.*",
+            ".*无数据.*",
+            ".*无法判断.*",
+            ".*没有.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "mobileNum",
+            "mobileUseTime"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_SLIENT_RESULT",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplit2ValueBuilder",
+        "parameters" : {
+          "regex1" : "([\\d]+)[\u4e00-\u9fa5]+([\\d]+)[\u4e00-\u9fa5]+",
+          "regex2" : ".*关机[\u4e00-\u9fa5]+未超过[\\d]*\\.*[\\d]*天.*",
+          "invalidDataEvidence" : [
+            ".*无数据.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "daysStatis",
+            "daysSum"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_EACH_OTHER_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+[，|,]*[\u4e00-\u9fa5]*([\\d]*\\.*[\\d]*)%*",
+          "invalidDataEvidence" : [
+            ".*未提供.*",
+            ".*无数据.*",
+            ".*无法判断.*",
+            ".*没有.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "contactsCnt",
+             "contactsPer"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_CHARACTER_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+[，|,][\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+",
+          "invalidDataEvidence" : [
+            ".*未发现.*",
+            ".*未提供.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "contactedCnt",
+            "contactedTime"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_NUMBER_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+[\\d]+[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+[，|,][\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+",
+          "invalidDataEvidence" : [
+            ".*未发现.*",
+            ".*未提供.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "contactedCnt",
+            "contactedTime"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_NIGHT_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "\\w*[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)%",
+          "invalidDataEvidence" : [
+            ".*未发现.*",
+            ".*未提供.*",
+            ".*未找到.*"
+          ],
+          "count" : 1,
+          "output" : [
+            "activityPer"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_LOANORG_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexLoopBuilder",
+        "parameters" : {
+          "spliter" : ";",
+          "regex1" : "[\u4e00-\u9fa5]*[:|：]*(\\[.*?\\])(主叫.*)",
+          "regex2" : "[\u4e00-\u9fa5]+([\\d]+)[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+[，|, |；]*[\u4e00-\u9fa5]+([\\d]+)[\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+",
+          "invalidDataEvidence" : [
+            ".*未提供.*",
+            ".*未找到.*"
+          ],
+          "count" : 5,
+          "output" : [
+            "loanOrg",
+            "loanOrgCallCnt",
+            "loanOrgCallTime",
+            "loanOrgCalledCnt",
+            "loanOrgCalledTime"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_SILENT_EVIDENCE",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitRegexValueBuilder",
+        "parameters" : {
+          "regex1" : "\\w*[\u4e00-\u9fa5]+[,|，][\u4e00-\u9fa5]+([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]*(.*)",
+          "spliter" : "/",
+          "regex2" : "([\\s\\d]+-[\\s\\d]+-[\\s\\d\\w:]+)-([\\s\\d]+-[\\s\\d]+-[\\s\\d\\w:]+)[,|，]*[\\s]*([\\d]*\\.*[\\d]*)[\u4e00-\u9fa5]+.*",
+          "invalidDataEvidence" : [
+            ".*未提供.*",
+            ".*未检测.*",
+            ".*未找到.*"
+          ],
+          "count1" : 2,
+          "output1" : [
+            "freq"
+          ],
+          "count2" : 3,
+          "output2" : [
+            "dateBegin",
+            "dateEnd",
+            "dateSum"
+          ],
+          "prefix2to1" : "freq",
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      }
+    ],
+    
+    "prefixs" : [
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION_APP_POINT",
+        "depth" : 4,
+        "pattern" : "jingshu_yys_phoneReport_applicationCheck_\\d+"
+      },
+      {
+        "formatter_id" : "PREFIX_ITEM_UNION_CHECK_POINT",
+        "depth" : 4,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_\\d+"
+      }
+    ],
+    
+    "values" : [
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_userInfoCheck_checkSearchInfo_phoneWithOtherIdcards"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_userInfoCheck_checkSearchInfo_phoneWithOtherNames"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_userInfoCheck_checkSearchInfo_idcardWithOtherPhones"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_userInfoCheck_checkSearchInfo_idcardWithOtherNames"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_userInfoCheck_checkSearchInfo_searchedOrgType"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_userInfoCheck_checkSearchInfo_registerOrgType"
+      },
+      {
+        "formatter_id" : "VALUE_USER_INFO_CHECK",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_userInfoCheck_checkSearchInfo_arisedOpenWeb"
+      },
+      {
+        "formatter_id" : "VALUE_APPLICATION_CHECK_MOBILE",
+        "depth" : 6,
+        "pattern" : "jingshu_yys_phoneReport_applicationCheck_contact\\d+_checkPoints_checkMobile"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_REQULAR_CIRCLE_RESULT",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_regularCircle_result"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_REQULAR_CIRCLE_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_regularCircle_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_USED_TIME_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_phoneUsedTime_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_SLIENT_RESULT",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_phoneSilent_result"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_PHONE_SILENT_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_phoneSilent_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_EACH_OTHER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_contactEachOther_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_CHARACTER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_conatctMacao_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_NUMBER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_contact110_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_NUMBER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_contact120_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_CHARACTER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_contactLawyer_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_CHARACTER_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_contactCourt_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_NIGHT_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_contactNight_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_LOANORG_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_contactLoan_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_LOANORG_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_contactBank_evidence"
+      },
+      {
+        "formatter_id" : "VALUE_BEHAVIOR_CHECK_CONTACT_LOANORG_EVIDENCE",
+        "depth" : 5,
+        "pattern" : "jingshu_yys_phoneReport_behaviorCheck_contactCreditCard_evidence"
+      }
+      
+    ]
+  },
+  
+  "zc" : {
+    "topic" : "parser_zc",
+    "formatters" : [
+      {
+        "formatter_id" : "eachOrgTypeCount",
+        "type" : "PREFIX",
+        "clazz" : "com.tairan.cloud.credit.prefix.ItemsUnionPrefixBuilder",
+        "parameters" : {
+          "removeIndex" : false,
+          "replaces" : {},
+          "union" : [
+            "orgTypeCode"
+          ],
+          "sameFields" : []
+        }
+      },
+      {
+        "formatter_id" : "queryHistory",
+        "type" : "PREFIX",
+        "clazz" : "com.tairan.cloud.credit.prefix.ItemsUnionPrefixBuilder",
+        "parameters" : {
+          "removeIndex" : false,
+          "replaces" : {},
+          "union" : [
+            "queryOrgTypeCode"
+          ],
+          "sameFields" : []
+        }
+      },
+      {
+        "formatter_id" : "VALUE_LOAN_RECORDS_AMOUNT",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "[\\(\\[]([^,]+),([^\\)\\]]+)[\\)\\]]",
+          "invalidDataEvidence" : [
+            ".*无数据.*",
+            ".*未提供.*",
+            ".*没有.*",
+            ".*不详.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "bot",
+            "top"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      }
+    ],
+    "prefixs" : [
+      {
+        "formatter_id" : "eachOrgTypeCount",
+        "depth" : 6,
+        "pattern" : "zc_data_orgCredit_queryStastics_eachOrgTypeCount_\\d+"
+      },
+      {
+        "formatter_id" : "queryHistory",
+        "depth" : 5,
+        "pattern" : "zc_data_orgCredit_queryHistory_\\d+"
+      }
+    ],
+    "values" : [
+      {
+        "formatter_id" : "VALUE_LOAN_RECORDS_AMOUNT",
+        "depth" : 6,
+        "pattern" : "zc_data_loanInfo_loanRecords_\\d+_amount"
+      }
+    ]
+  },
+
+  "jingshu_zc" : {
+    "topic" : "parser_jingshu_zc",
+    "formatters" : [
+      {
+        "formatter_id" : "eachOrgTypeCount",
+        "type" : "PREFIX",
+        "clazz" : "com.tairan.cloud.credit.prefix.ItemsUnionPrefixBuilder",
+        "parameters" : {
+          "removeIndex" : false,
+          "replaces" : {},
+          "union" : [
+            "orgTypeCode"
+          ],
+          "sameFields" : []
+        }
+      },
+      {
+        "formatter_id" : "queryHistory",
+        "type" : "PREFIX",
+        "clazz" : "com.tairan.cloud.credit.prefix.ItemsUnionPrefixBuilder",
+        "parameters" : {
+          "removeIndex" : false,
+          "replaces" : {},
+          "union" : [
+            "queryOrgTypeCode"
+          ],
+          "sameFields" : []
+        }
+      },
+      {
+        "formatter_id" : "VALUE_LOAN_RECORDS_AMOUNT",
+        "type" : "VALUE",
+        "clazz" : "com.tairan.cloud.credit.value.RegexSplitValueBuilder",
+        "parameters" : {
+          "regex" : "[\\(\\[]([^,]+),([^\\)\\]]+)[\\)\\]]",
+          "invalidDataEvidence" : [
+            ".*无数据.*",
+            ".*未提供.*",
+            ".*没有.*",
+            ".*不详.*"
+          ],
+          "count" : 2,
+          "output" : [
+            "bot",
+            "top"
+          ],
+          "outputSelf" : "true",
+          "notMatchOutput" : ""
+        }
+      }
+    ],
+    "prefixs" : [
+      {
+        "formatter_id" : "eachOrgTypeCount",
+        "depth" : 6,
+        "pattern" : "jingshu_zc_data_orgCredit_queryStastics_eachOrgTypeCount_\\d+"
+      },
+      {
+        "formatter_id" : "queryHistory",
+        "depth" : 5,
+        "pattern" : "jingshu_zc_data_orgCredit_queryHistory_\\d+"
+      }
+    ],
+    "values" : [
+      {
+        "formatter_id" : "VALUE_LOAN_RECORDS_AMOUNT",
+        "depth" : 6,
+        "pattern" : "jingshu_zc_data_loanInfo_loanRecords_\\d+_amount"
+      }
+    ]
+  },
+  
+  "jxl_gjj" : {
+    "topic" : "parser_jxl_gjj"
+  },
+
+  "jxl_yys" : {
+    "topic" : "parser_jxl_yys"
+  },
+  
+  "jxl_taobao" : {
+    "topic" : "parser_jxl_taobao"
+  },
+  
+  "jxl_jingdong" : {
+    "topic" : "parser_jxl_jingdong"
+  },
+
+  "jingshu_taobao" : {
+    "topic" : "parser_jingshu_taobao"
+  },
+  
+  "jingshu_jingdong" : {
+    "topic" : "parser_jingshu_jingdong"
+  },
+  
+  "llq" : {
+    "topic" : "parser_llq"
+  },
+
+  "jingshu_llq" : {
+    "topic" : "parser_jingshu_llq"
+  },
+  
+  "jingshu_yhzx" : {
+    "topic" : "parser_jingshu_yhzx"
+  },
+  
+
+  "jingshu_gjj" : {
+    "topic" : "parser_jingshu_gjj"
+  },
+  
+  "jingshu_xxw" : {
+    "topic" : "parser_jingshu_xxw"
+  },
+  
+  "jingshu_txl" : {
+    "topic" : "parser_jingshu_txl"
+  },
+  
+    "jingshu_face" : {
+    "topic" : "parser_jingshu_face"
+  },
+  
+  "pengy_bc" : {
+    "topic" : "parser_pengy_bc"
+  },
+
+  "pengy_pc" : {
+    "topic" : "parser_pengy_pc"
+  },
+
+  "pengy_rk" : {
+    "topic" : "parser_pengy_rk"
+  },
+
+  "pengy_qu" : {
+    "topic" : "parser_pengy_qu"
+  }, 
+
+  "jingshu_pengyBc" : {
+    "topic" : "parser_jingshu_pengyBc"
+  },
+
+  "jingshu_pengyPc" : {
+    "topic" : "parser_jingshu_pengyPc"
+  },
+
+  "jingshu_pengyRk" : {
+    "topic" : "parser_jingshu_pengyRk"
+  },
+
+  "jingshu_pengyQu" : {
+    "topic" : "parser_jingshu_pengyQu"
+  }, 
+  
+  "bqs_atfr" : {
+    "topic" : "parser_bqs_atfr"
+  },
+
+  "bqs_di" : {
+    "topic" : "parser_bqs_di"
+  },
+
+  "jingshu_bqsAtfr" : {
+    "topic" : "parser_jingshu_bqsAtfr"
+  },
+
+  "jingshu_bqsDi" : {
+    "topic" : "parser_jingshu_bqsDi"
+  },  
+  
+  "weiy" : {
+    "topic" : "parser_weiy"
+  },
+    
+  "jingshu_weiy" : {
+    "topic" : "parser_jingshu_weiy"
+  },
+  
+  "jingshu_zm" : {
+    "topic" : "parser_jingshu_zm"
+  },
+
+  "zm" : {
+    "topic" : "parser_zm"
+  }, 
+
+ "jingshu_td_yys":{
+    "topic": "parser_jingshu_td_yys"
+  },
+  
+   "jingshu_hd":{
+    "topic": "parser_jingshu_hd"
+   },
+   
+   "jingshu_yf":{
+     "topic": "parser_jingshu_yf"
+   },
+   
+   "jingshu_gps":{
+      "topic":"parser_jingshu_gps"
+   },
+  
+  "common" : {
+    "topic" : "common",
+    "is_item" : true,
+    "clazz" : "com.tairan.cloud.credit.item.CommonItemBuilder",
+    "parameters" : {
+      "dictionary" : {
+
+      }
+    }
+  }
+}

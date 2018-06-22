@@ -1,0 +1,42 @@
+{
+    "_id" : ObjectId("58100668d06aedb76ae0028c"),
+    "_class" : "com.tairan.cloud.credit.domain.tric.TricTdLoanEvaluation",
+    "id_number" : "531623198110275436",
+    "name" : "Mrs",
+    "mobile" : "13568193475",
+    "timestamp" : NumberLong(1477445224662),
+    "response" : {
+        "status" : 1,
+        "report" : {
+            "_class" : "com.tairan.cloud.credit.domain.td.TdLoanEvaluationReport",
+            "report_id" : "ER2016102609271216618738",
+            "success" : true,
+            "final_score" : 98,
+            "final_decision" : "Reject",
+            "apply_time" : NumberLong(1477445233000),
+            "report_time" : NumberLong(1477445233000),
+            "risk_items" : [
+                {
+                    "item_id" : 1694512,
+                    "item_name" : "身份证格式校验错误",
+                    "risk_level" : "high",
+                    "group" : "个人基本信息核查"
+                }, 
+                {
+                    "item_id" : 1694570,
+                    "item_name" : "手机号命中中风险关注名单",
+                    "risk_level" : "low",
+                    "group" : "不良信息扫描",
+                    "item_detail" : {}
+                }, 
+                {
+                    "item_id" : 1694654,
+                    "item_name" : "7天内设备或身份证或手机号申请次数过多",
+                    "risk_level" : "low",
+                    "group" : "客户行为检测",
+                    "item_detail" : {}
+                }
+            ]
+        }
+    }
+}

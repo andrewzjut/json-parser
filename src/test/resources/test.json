@@ -1,0 +1,8 @@
+{
+  "regex" : "([\u4e00-\u9fa5]+)：(\\d+)",
+  "count" : 2,
+  "output" : [
+    "Desc",
+    "Cnt"
+  ]
+}

@@ -1,0 +1,116 @@
+{
+    "_id" : "581aa0e3b8cffce1c6ca45bc",
+    "_class" : "com.tairan.cloud.credit.domain.tric.TricTdLoanEvaluation",
+    "id_number" : "220503198912160319",
+    "name" : "王铎",
+    "mobile" : "18775068233",
+    "timestamp" : 1478140130993,
+    "response" : {
+        "status" : 1,
+        "report" : {
+            "final_score" : 100,
+            "risk_items" : [ 
+                {
+                    "risk_level" : "medium",
+                    "item_detail" : {
+                        "fraud_type" : "信贷逾期名单"
+                    },
+                    "item_id" : 1694530,
+                    "item_name" : "身份证命中高风险关注名单",
+                    "group" : "不良信息扫描"
+                }, 
+                {
+                    "risk_level" : "low",
+                    "item_detail" : {
+                        "fraud_type" : "机构代办、异常借款、垃圾注册"
+                    },
+                    "item_id" : 1694536,
+                    "item_name" : "身份证命中中风险关注名单",
+                    "group" : "不良信息扫描"
+                }, 
+                {
+                    "risk_level" : "medium",
+                    "item_detail" : {},
+                    "item_id" : 1694542,
+                    "item_name" : "身份证_姓名命中信贷逾期模糊名单",
+                    "group" : "不良信息扫描"
+                }, 
+                {
+                    "risk_level" : "low",
+                    "item_detail" : {
+                        "fraud_type" : "机构代办、异常借款"
+                    },
+                    "item_id" : 1694570,
+                    "item_name" : "手机号命中中风险关注名单",
+                    "group" : "不良信息扫描"
+                }, 
+                {
+                    "risk_level" : "low",
+                    "item_detail" : {
+                        "frequency_detail" : [ 
+                            "3个月身份证关联家庭地址数：3", 
+                            "3个月身份证关联邮箱数：2", 
+                            "3个月身份证关联手机号数：4"
+                        ]
+                    },
+                    "item_id" : 1694634,
+                    "item_name" : "3个月内身份证关联多个申请信息",
+                    "group" : "客户行为检测"
+                }, 
+                {
+                    "risk_level" : "high",
+                    "item_detail" : {
+                        "platform_detail" : [ 
+                            "一般消费分期平台:1", 
+                            "厂商汽车金融:1"
+                        ],
+                        "platform_count" : 2
+                    },
+                    "item_id" : 1694668,
+                    "item_name" : "7天内申请人在多个平台申请借款",
+                    "group" : "多平台借贷申请检测"
+                }, 
+                {
+                    "risk_level" : "high",
+                    "item_detail" : {
+                        "platform_detail" : [ 
+                            "一般消费分期平台:8", 
+                            "互联网金融门户:1", 
+                            "小额贷款公司:3", 
+                            "P2P网贷:11", 
+                            "大型消费金融公司:1"
+                        ],
+                        "platform_count" : 24
+                    },
+                    "item_id" : 1869544,
+                    "item_name" : "3个月内申请人申请借款平台总数大于等于15_无本平台",
+                    "group" : "多平台借贷申请检测"
+                }, 
+                {
+                    "risk_level" : "low",
+                    "item_detail" : {
+                        "platform_detail" : [ 
+                            "一般消费分期平台:16", 
+                            "互联网金融门户:1", 
+                            "银行消费金融公司:1", 
+                            "小额贷款公司:8", 
+                            "理财机构:1", 
+                            "P2P网贷:29", 
+                            "大型消费金融公司:4", 
+                            "厂商汽车金融:1"
+                        ],
+                        "platform_count" : 61
+                    },
+                    "item_id" : 1694680,
+                    "item_name" : "24个月内申请人在多个平台申请借款",
+                    "group" : "多平台借贷申请检测"
+                }
+            ],
+            "final_decision" : "Reject",
+            "report_time" : 1478140131000,
+            "success" : true,
+            "report_id" : "ER2016110310285012451819",
+            "apply_time" : 1478140131000
+        }
+    }
+}

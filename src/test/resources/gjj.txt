@@ -1,0 +1,300 @@
+{
+    "id_number": "130230199303190623",
+    "response": {
+        "status": 1,
+        "report": {
+            "final_score": 100,
+            "risk_items": [
+                {
+                    "risk_level": "low",
+                    "item_detail": {
+                        "namelist_hit_details": [
+                            {
+                                "hit_type_displayname": "借款人身份证",
+                                "fraud_type": "信用异常、异常借款",
+                                "description": "验证匹配字段是否在欺诈灰名单中",
+                                "type": "grey_list"
+                            }
+                        ],
+                        "fraud_type": "信用异常、异常借款"
+                    },
+                    "item_id": 1694536,
+                    "item_name": "身份证命中中风险关注名单",
+                    "group": "不良信息扫描"
+                },
+                {
+                    "risk_level": "low",
+                    "item_detail": {
+                        "namelist_hit_details": [
+                            {
+                                "hit_type_displayname": "借款人手机",
+                                "fraud_type": "信用异常、异常借款",
+                                "description": "验证匹配字段是否在欺诈灰名单中",
+                                "type": "grey_list"
+                            }
+                        ],
+                        "fraud_type": "信用异常、异常借款"
+                    },
+                    "item_id": 1694570,
+                    "item_name": "手机号命中中风险关注名单",
+                    "group": "不良信息扫描"
+                },
+                {
+                    "risk_level": "low",
+                    "item_detail": {
+                        "namelist_hit_details": [
+                            {
+                                "hit_type_displayname": "借款人手机",
+                                "fraud_type": "异常绑卡、异常支付、机构代办、风险激活、伪冒风险",
+                                "description": "验证匹配字段是否在欺诈灰名单中",
+                                "type": "grey_list"
+                            }
+                        ],
+                        "fraud_type": "异常绑卡、异常支付、机构代办、风险激活、伪冒风险"
+                    },
+                    "item_id": 1694572,
+                    "item_name": "手机号命中低风险关注名单",
+                    "group": "不良信息扫描"
+                },
+                {
+                    "risk_level": "low",
+                    "item_detail": {
+                        "frequency_detail_list": [
+                            {
+                                "data": [
+                                    "江苏无锡※※※※※※※※※※※※※※幢305"
+                                ],
+                                "detail": "3个月身份证关联家庭地址数：1"
+                            },
+                            {
+                                "data": [
+                                    "13506150523",
+                                    "b4b1※※※※※※※※※※※※※※※※※※83f1"
+                                ],
+                                "detail": "3个月身份证关联手机号数：2"
+                            },
+                            {
+                                "data": [
+                                    "ayh※※ard@msxf.com",
+                                    "247※※※412@qq.com",
+                                    "247※※※412@qq.coom",
+                                    "2477※※※※※※※※※※.com"
+                                ],
+                                "detail": "3个月身份证关联邮箱数：4"
+                            }
+                        ],
+                        "type": "frequency_detail"
+                    },
+                    "item_id": 1694634,
+                    "item_name": "3个月内身份证关联多个申请信息",
+                    "group": "客户行为检测"
+                },
+                {
+                    "risk_level": "medium",
+                    "item_detail": {
+                        "frequency_detail_list": [
+                            {
+                                "detail": "1天内身份证关联设备数：0"
+                            },
+                            {
+                                "data": [
+                                    "46a4※※※※※※※※※※※※※※※※※※※※※※※※e13a",
+                                    "d5b5※※※※※※※※※※※※※※※※※※※※※※※※※※※※c23f",
+                                    "6620※※※※※※※※※※※※※※※※※※※※※※※※※※※※40bb",
+                                    "e380※※※※※※※※※※※※※※※※※※※※※※※※c342",
+                                    "6e1f※※※※※※※※※※※※※※※※※※※※※※※※05f4",
+                                    "aead※※※※※※※※※※※※※※※※※※※※※※※※※※※※417f",
+                                    "c414※※※※※※※※※※※※※※※※※※※※※※※※6a58"
+                                ],
+                                "detail": "7天内身份证关联设备数：7"
+                            }
+                        ],
+                        "type": "frequency_detail"
+                    },
+                    "item_id": 1694664,
+                    "item_name": "7天内身份证使用过多设备进行申请",
+                    "group": "客户行为检测"
+                },
+                {
+                    "risk_level": "high",
+                    "item_detail": {
+                        "platform_detail_dimension": [
+                            {
+                                "count": 14,
+                                "detail": [
+                                    "一般消费分期平台:4",
+                                    "信用卡中心:1",
+                                    "小额贷款公司:3",
+                                    "P2P网贷:4",
+                                    "大型消费金融公司:1",
+                                    "厂商汽车金融:1"
+                                ],
+                                "dimension": "借款人手机详情"
+                            },
+                            {
+                                "count": 15,
+                                "detail": [
+                                    "一般消费分期平台:5",
+                                    "信用卡中心:1",
+                                    "小额贷款公司:3",
+                                    "P2P网贷:6",
+                                    "大型消费金融公司:1",
+                                    "厂商汽车金融:1"
+                                ],
+                                "dimension": "借款人身份证详情"
+                            }
+                        ],
+                        "platform_detail": [
+                            "一般消费分期平台:5",
+                            "信用卡中心:1",
+                            "小额贷款公司:3",
+                            "P2P网贷:6",
+                            "大型消费金融公司:1",
+                            "厂商汽车金融:1"
+                        ],
+                        "platform_count": 8,
+                        "type": "platform_detail"
+                    },
+                    "item_id": 1694668,
+                    "item_name": "7天内申请人在多个平台申请借款",
+                    "group": "多平台借贷申请检测"
+                },
+                {
+                    "risk_level": "high",
+                    "item_detail": {
+                        "platform_detail_dimension": [
+                            {
+                                "count": 46,
+                                "detail": [
+                                    "房地产金融:1",
+                                    "一般消费分期平台:11",
+                                    "互联网金融门户:1",
+                                    "银行消费金融公司:2",
+                                    "信用卡中心:1",
+                                    "财产保险:1",
+                                    "小额贷款公司:6",
+                                    "P2P网贷:21",
+                                    "大型消费金融公司:2"
+                                ],
+                                "dimension": "借款人手机详情"
+                            },
+                            {
+                                "count": 48,
+                                "detail": [
+                                    "房地产金融:1",
+                                    "一般消费分期平台:12",
+                                    "互联网金融门户:1",
+                                    "银行消费金融公司:2",
+                                    "信用卡中心:1",
+                                    "财产保险:1",
+                                    "小额贷款公司:7",
+                                    "P2P网贷:21",
+                                    "大型消费金融公司:2"
+                                ],
+                                "dimension": "借款人身份证详情"
+                            }
+                        ],
+                        "platform_detail": [
+                            "房地产金融:1",
+                            "一般消费分期平台:12",
+                            "互联网金融门户:1",
+                            "银行消费金融公司:2",
+                            "信用卡中心:1",
+                            "财产保险:1",
+                            "小额贷款公司:7",
+                            "P2P网贷:8",
+                            "大型消费金融公司:2"
+                        ],
+                        "platform_count": 10,
+                        "type": "platform_detail"
+                    },
+                    "item_id": 1869544,
+                    "item_name": "3个月内申请人申请借款平台总数大于等于15_无本平台",
+                    "group": "多平台借贷申请检测"
+                },
+                {
+                    "risk_level": "low",
+                    "item_detail": {
+                        "platform_detail_dimension": [
+                            {
+                                "count": 55,
+                                "detail": [
+                                    "房地产金融:1",
+                                    "一般消费分期平台:11",
+                                    "互联网金融门户:1",
+                                    "银行消费金融公司:3",
+                                    "信用卡中心:1",
+                                    "财产保险:2",
+                                    "小额贷款公司:6",
+                                    "理财机构:1",
+                                    "P2P网贷:25",
+                                    "大型消费金融公司:3",
+                                    "厂商汽车金融:1"
+                                ],
+                                "dimension": "借款人手机详情"
+                            },
+                            {
+                                "count": 57,
+                                "detail": [
+                                    "房地产金融:1",
+                                    "一般消费分期平台:12",
+                                    "互联网金融门户:1",
+                                    "银行消费金融公司:3",
+                                    "信用卡中心:1",
+                                    "财产保险:2",
+                                    "小额贷款公司:7",
+                                    "理财机构:1",
+                                    "P2P网贷:25",
+                                    "大型消费金融公司:3",
+                                    "厂商汽车金融:1"
+                                ],
+                                "dimension": "借款人身份证详情"
+                            }
+                        ],
+                        "platform_detail": [
+                            "房地产金融:1",
+                            "一般消费分期平台:12",
+                            "互联网金融门户:1",
+                            "银行消费金融公司:3",
+                            "信用卡中心:1",
+                            "财产保险:2",
+                            "小额贷款公司:7",
+                            "理财机构:1",
+                            "P2P网贷:12",
+                            "大型消费金融公司:3",
+                            "厂商汽车金融:1"
+                        ],
+                        "platform_count": 13,
+                        "type": "platform_detail"
+                    },
+                    "item_id": 1694680,
+                    "item_name": "24个月内申请人在多个平台申请借款",
+                    "group": "多平台借贷申请检测"
+                }
+            ],
+            "address_detect": {
+                "mobile_address": "江苏省无锡市",
+                "id_card_address": "江苏省无锡市宜兴市"
+            },
+            "final_decision": "Reject",
+            "report_time": 1490856736000,
+            "success": true,
+            "report_id": "ER2017033014521519935113",
+            "apply_time": 1490856735000,
+            "application_id": "1703301452152311BD9A8E8E33C02C80"
+        }
+    },
+    "name": "李丽",
+    "mobile": "15830545552",
+    "_id": {
+        "date": 1490856735000,
+        "inc": 1534558867,
+        "machine": 1156845731,
+        "new": false,
+        "time": 1490856735000,
+        "timeSecond": 1490856735,
+        "timestamp": 1490856735
+    },
+    "strategy": "360fengdai_web",
+    "timestamp": 149085673523
+}

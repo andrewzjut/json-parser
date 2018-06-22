@@ -1,0 +1,169 @@
+{
+    "_id" : "580eaf0ed06a2f81bd1f0561",
+    "_class" : "com.tairan.cloud.credit.domain.nfcs.NfcsCreditQuery",
+    "idType" : "0",
+    "idNo" : "430725198204115523",
+    "data" : {
+        "loanAbstract_repaymentMth" : "26500",
+        "guaranteeInfo" : [ 
+            {
+                "sourceTime" : "2016.05.27",
+                "project" : "",
+                "amt" : "",
+                "projectTime" : "",
+                "relationship" : ""
+            }
+        ],
+        "number_cellphone" : "",
+        "loanAbstract_maxCreditAmt" : "150000",
+        "unmber_idcard" : "430725198204115523",
+        "loanAbstract_currentOverdueAmt" : "0",
+        "creditTips" : [ 
+            {
+                "progect" : "",
+                "sourceTime" : "2016.10.25",
+                "description" : "申请笔数 = 0"
+            }
+        ],
+        "spouseInfo_realname" : "",
+        "cellPhoneSourceTime" : "2016.05.27",
+        "loanAbstract_currentLoanLeft" : "25000",
+        "spouseInfo_cellPhone" : "",
+        "diploma" : "大学专科和专科学校",
+        "loanAbstract_currentLoanCnt" : "1",
+        "spouseInfo_gender" : "",
+        "personalStatement" : [ 
+            {
+                "personalStatement_description" : "",
+                "personalStatement_sourceTime" : "",
+                "personalStatement_num" : ""
+            }
+        ],
+        "loanAbstract_maxOverdueAmt" : "0",
+        "sex_user" : "女性",
+        "spouseInfo_idNo" : "",
+        "specialDeal" : [ 
+            {
+                "modifyMonth" : "",
+                "recordType" : "",
+                "sourceTime" : "",
+                "amt" : "",
+                "time" : "",
+                "detail" : "",
+                "recordSource" : ""
+            }
+        ],
+        "reportTime" : "2016.10.25 09:01:13",
+        "realname_user" : "刘阿玲",
+        "applyHistoryAddress" : [],
+        "reportNum" : "263586775682266343565620",
+        "birthday_user" : "1982.04.11",
+        "homePhoneSourceTime" : "2016.05.27",
+        "loanAbstract_currentLoanAmt" : "150000",
+        "type_user" : "身份证",
+        "positionCaption" : "未知",
+        "emailSourceTime" : "2016.05.27",
+        "spouseInfo_workUnitSourceTime" : "",
+        "jobInfo" : [ 
+            {
+                "workUnit" : "fnboled旗舰店",
+                "occupation" : "未知",
+                "sourceTime" : "2016.05.27"
+            }
+        ],
+        "loanReportQueryRecord" : [ 
+            {
+                "reason" : "贷款审批",
+                "org" : "01.P2P机构",
+                "time" : "2016.10.25 08:54:22"
+            }, 
+            {
+                "reason" : "贷款审批",
+                "org" : "02.P2P机构",
+                "time" : "2016.10.24 22:49:47"
+            }, 
+            {
+                "reason" : "贷款审批",
+                "org" : "03.P2P机构",
+                "time" : "2016.10.24 22:07:57"
+            }, 
+            {
+                "reason" : "贷款审批",
+                "org" : "04.P2P机构",
+                "time" : "2016.10.24 21:50:52"
+            }, 
+            {
+                "reason" : "未知原因",
+                "org" : "05.P2P机构",
+                "time" : "2016.10.24 15:30:33"
+            }
+        ],
+        "spouseInfo_birthday" : "",
+        "loanReportFirstContact" : [ 
+            {
+                "name" : "刘阿玲",
+                "sourceTime" : "2016.05.27",
+                "relationship" : "其他",
+                "cellPhone" : "1864132XXXX"
+            }
+        ],
+        "spouseInfo_idType" : "",
+        "loanDetail" : [ 
+            {
+                "loc" : "浙江省杭州市",
+                "curetntOverdueCnt" : "0",
+                "allOverdueCnt" : "0",
+                "sourceTime" : "2016.05.27",
+                "project" : "01.个人经营性贷款",
+                "loanProjectStatus" : "正常",
+                "31D60DAmt" : "0",
+                "91D180DAmt" : "0",
+                "24mthsPaymentDescription" : "//////////////////*NNNNN",
+                "maxOverdueCnt" : "0",
+                "repaymentDate" : "2016.09.26",
+                "currency" : "人民币",
+                "repaymentFrequency" : "月",
+                "61D90DAmt" : "0",
+                "org" : "杭州蜂贷网络科技有限公司",
+                "actualRepaymentAmt" : "26500",
+                "180DAmt" : "0",
+                "maxDebtsAmt" : "150000",
+                "repaymentAmt" : "26500",
+                "creditShareAmt" : "150000",
+                "lastLoanLeft" : "25000",
+                "currentOverdueAmt" : "0",
+                "guaranteeType" : "信用、免担保",
+                "creditAmt" : "150000",
+                "projectTime" : "2016.04.27",
+                "actualRepaymentTime" : "2016.09.26",
+                "loanMthsLeft" : "1"
+            }
+        ],
+        "loanAbstract_firstLoanTime" : "2016.04.27",
+        "loanReportSecondContact" : [],
+        "email" : "",
+        "diplomaSourceTime" : "2016.05.27",
+        "reportId" : "201610250902030001",
+        "positionCaptionSourceTime" : "2016.05.27",
+        "number_telephone" : "",
+        "queryReason" : "贷款审批",
+        "loanAbstract_maxOverdueCnt" : "0",
+        "marriagestatus" : "已婚",
+        "spouseInfo_workUnit" : "",
+        "spouseInfo_cellPhoneSourceTime" : "",
+        "marriageSourceTime" : "2016.05.27",
+        "loanApplyAbstract" : [ 
+            {
+                "mths" : "",
+                "org" : "",
+                "sourceTime" : "2016.05.27",
+                "amt" : "",
+                "time" : "",
+                "type" : "",
+                "status" : ""
+            }
+        ]
+    },
+    "status" : 0,
+    "timestamp" : 1477357326246
+}

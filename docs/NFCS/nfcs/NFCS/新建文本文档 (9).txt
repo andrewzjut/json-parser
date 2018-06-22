@@ -1,0 +1,119 @@
+{
+    "_id" : ObjectId("57f88597e4b0fa54de4330af"),
+    "_class" : "com.tairan.cloud.credit.domain.nfcs.NfcsCreditQuery",
+    "idType" : "0",
+    "idNo" : "430203198203280214",
+    "data" : {
+        "loanAbstract_repaymentMth" : "",
+        "guaranteeInfo" : [ 
+            {
+                "sourceTime" : "2016.08.20",
+                "project" : "",
+                "amt" : "",
+                "projectTime" : "",
+                "relationship" : ""
+            }
+        ],
+        "number_cellphone" : "",
+        "loanAbstract_maxCreditAmt" : "",
+        "unmber_idcard" : "430203198203280214",
+        "loanAbstract_currentOverdueAmt" : "",
+        "creditTips" : [],
+        "spouseInfo_realname" : "",
+        "cellPhoneSourceTime" : "2016.08.20",
+        "loanAbstract_currentLoanLeft" : "",
+        "spouseInfo_cellPhone" : "",
+        "diploma" : "大学专科和专科学校",
+        "loanAbstract_currentLoanCnt" : "",
+        "spouseInfo_gender" : "",
+        "personalStatement" : [ 
+            {
+                "personalStatement_description" : "",
+                "personalStatement_sourceTime" : "",
+                "personalStatement_num" : ""
+            }
+        ],
+        "loanAbstract_maxOverdueAmt" : "",
+        "sex_user" : "男性",
+        "spouseInfo_idNo" : "",
+        "specialDeal" : [ 
+            {
+                "modifyMonth" : "",
+                "recordType" : "",
+                "sourceTime" : "",
+                "amt" : "",
+                "time" : "",
+                "detail" : "",
+                "recordSource" : ""
+            }
+        ],
+        "reportTime" : "2016.10.08 13:28:35",
+        "realname_user" : "蒋健",
+        "applyHistoryAddress" : [ 
+            {
+                "sourceTime" : "2016.08.20",
+                "home" : "湖南株洲石峰恒丰小区1栋503"
+            }
+        ],
+        "reportNum" : "815122514284100195866401",
+        "birthday_user" : "1982.03.28",
+        "homePhoneSourceTime" : "2016.08.20",
+        "loanAbstract_currentLoanAmt" : "",
+        "type_user" : "身份证",
+        "positionCaption" : "未知",
+        "emailSourceTime" : "2016.08.20",
+        "spouseInfo_workUnitSourceTime" : "",
+        "jobInfo" : [ 
+            {
+                "workUnit" : "中车株洲电力机车有限公司",
+                "occupation" : "不便分类的其他从业人员",
+                "sourceTime" : "2016.08.20"
+            }
+        ],
+        "loanReportQueryRecord" : [],
+        "spouseInfo_birthday" : "",
+        "loanReportFirstContact" : [ 
+            {
+                "name" : "袁姣",
+                "sourceTime" : "2016.08.20",
+                "relationship" : "配偶",
+                "cellPhone" : "1507413XXXX"
+            }
+        ],
+        "spouseInfo_idType" : "",
+        "loanDetail" : [],
+        "loanAbstract_firstLoanTime" : "",
+        "loanReportSecondContact" : [ 
+            {
+                "name" : "袁姣",
+                "sourceTime" : "2016.08.20",
+                "relationship" : "配偶",
+                "cellPhone" : "1507413XXXX"
+            }
+        ],
+        "email" : "",
+        "diplomaSourceTime" : "2016.08.20",
+        "reportId" : "201610081335190001",
+        "positionCaptionSourceTime" : "2016.08.20",
+        "number_telephone" : "",
+        "queryReason" : "未知原因",
+        "loanAbstract_maxOverdueCnt" : "",
+        "marriagestatus" : "已婚",
+        "spouseInfo_workUnit" : "",
+        "spouseInfo_cellPhoneSourceTime" : "",
+        "marriageSourceTime" : "2016.08.20",
+        "loanApplyAbstract" : [ 
+            {
+                "mths" : "",
+                "org" : "",
+                "sourceTime" : "2016.08.20",
+                "amt" : "",
+                "time" : "",
+                "type" : "",
+                "status" : ""
+            }
+        ]
+    },
+    "status" : 0,
+    "timestamp" : NumberLong(1475904919815)
+}
